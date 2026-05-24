@@ -9,18 +9,14 @@ export default async function handler(req, res) {
 
   const bcraBase = "https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias";
 
-  // IDs correctos v4.0:
-  // 1=Reservas, 7=BADLAR, 27=IPC mensual, 28=IPC interanual
-  // Riesgo pais: via dolarapi
-  // Tasa pases activos 1 día (reemplaza TEM): 164
   const endpoints = {
     dolares:       "https://dolarapi.com/v1/dolares",
-    riesgoPais:    "https://dolarapi.com/v1/cotizaciones/riesgo-pais",
     ipc:           `${bcraBase}/27?Desde=${desde}&Hasta=${hasta}&Limit=500`,
     ipcInteranual: `${bcraBase}/28?Desde=${desde}&Hasta=${hasta}&Limit=500`,
     badlar:        `${bcraBase}/7?Desde=${desde}&Hasta=${hasta}&Limit=500`,
     reservas:      `${bcraBase}/1?Desde=${desde}&Hasta=${hasta}&Limit=500`,
     tem:           `${bcraBase}/12?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    riesgoPais:    "https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais",
   };
 
   if (!endpoint || !endpoints[endpoint]) {
@@ -45,10 +41,12 @@ export default async function handler(req, res) {
 
     const json = await response.json();
 
-    // dolarapi devuelve array directo, BCRA v4.0 devuelve {results:[{idVariable, detalle:[]}]}
     let normalized;
-    if (endpoint === 'dolares' || endpoint === 'riesgoPais') {
+    if (endpoint === 'dolares') {
       normalized = json;
+    } else if (endpoint === 'riesgoPais') {
+      // argentinadatos devuelve [{fecha, valor}] — mismo formato que BCRA
+      normalized = { results: Array.isArray(json) ? json : [] };
     } else {
       const detalle = json?.results?.[0]?.detalle || [];
       normalized = { results: detalle };
