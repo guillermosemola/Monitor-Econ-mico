@@ -9,26 +9,18 @@ export default async function handler(req, res) {
 
   const bcraBase = "https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias";
 
-  // Endpoint especial para descubrir IDs
-  if (endpoint === 'list') {
-    try {
-      const r = await fetch(`${bcraBase}?Limit=200`, { headers: { Accept: "application/json" } });
-      const j = await r.json();
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      return res.status(200).json(j);
-    } catch(e) {
-      return res.status(500).json({ error: e.message });
-    }
-  }
-
+  // IDs correctos v4.0:
+  // 1=Reservas, 7=BADLAR, 27=IPC mensual, 28=IPC interanual
+  // Riesgo pais: via dolarapi
+  // Tasa pases activos 1 día (reemplaza TEM): 164
   const endpoints = {
     dolares:       "https://dolarapi.com/v1/dolares",
-    ipc:           `${bcraBase}/31?Desde=${desde}&Hasta=${hasta}&Limit=500`,
-    ipcInteranual: `${bcraBase}/30?Desde=${desde}&Hasta=${hasta}&Limit=500`,
-    tem:           `${bcraBase}/27?Desde=${desde}&Hasta=${hasta}&Limit=500`,
-    badlar:        `${bcraBase}/28?Desde=${desde}&Hasta=${hasta}&Limit=500`,
-    riesgoPais:    `${bcraBase}/29?Desde=${desde}&Hasta=${hasta}&Limit=500`,
-    reservas:      `${bcraBase}/6?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    riesgoPais:    "https://dolarapi.com/v1/cotizaciones/riesgo-pais",
+    ipc:           `${bcraBase}/27?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    ipcInteranual: `${bcraBase}/28?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    badlar:        `${bcraBase}/7?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    reservas:      `${bcraBase}/1?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    tem:           `${bcraBase}/12?Desde=${desde}&Hasta=${hasta}&Limit=500`,
   };
 
   if (!endpoint || !endpoints[endpoint]) {
@@ -39,14 +31,30 @@ export default async function handler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=300");
 
   try {
-    const response = await fetch(endpoints[endpoint], { headers: { Accept: "application/json" } });
+    const response = await fetch(endpoints[endpoint], {
+      headers: { Accept: "application/json" }
+    });
+
     if (!response.ok) {
       const text = await response.text();
-      return res.status(response.status).json({ error: `Upstream ${response.status}`, detail: text.slice(0,300) });
+      return res.status(response.status).json({
+        error: `Upstream ${response.status}`,
+        detail: text.slice(0, 300)
+      });
     }
+
     const json = await response.json();
-    const detalle = json?.results?.[0]?.detalle || [];
-    res.status(200).json({ results: detalle });
+
+    // dolarapi devuelve array directo, BCRA v4.0 devuelve {results:[{idVariable, detalle:[]}]}
+    let normalized;
+    if (endpoint === 'dolares' || endpoint === 'riesgoPais') {
+      normalized = json;
+    } else {
+      const detalle = json?.results?.[0]?.detalle || [];
+      normalized = { results: detalle };
+    }
+
+    res.status(200).json(normalized);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
