@@ -1,28 +1,36 @@
 export default async (req) => {
   const url = new URL(req.url);
   const endpoint = url.searchParams.get("endpoint");
-
+ 
+  // Fechas dinámicas - siempre últimos 12 meses
+  const today = new Date();
+  const yearAgo = new Date(today);
+  yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+  const fmt = d => d.toISOString().split("T")[0];
+  const desde = fmt(yearAgo);
+  const hasta = fmt(today);
+ 
+  // api.estadisticasbcra.com — sin restricciones CORS, con token público
+  // Los endpoints devuelven array de {d: "YYYY-MM-DD", v: number}
   const endpoints = {
-    // Dólar — dolarapi
-    dolares: "https://dolarapi.com/v1/dolares",
-    // BCRA stats — usando ambito como respaldo
-    ipc:           "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/31/2025-05-24/2026-05-24",
-    ipcInteranual: "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/30/2025-05-24/2026-05-24",
-    tem:           "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/27/2025-05-24/2026-05-24",
-    badlar:        "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/28/2025-05-24/2026-05-24",
-    riesgoPais:    "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/29/2025-05-24/2026-05-24",
-    reservas:      "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/6/2025-05-24/2026-05-24",
+    dolares:       "https://dolarapi.com/v1/dolares",
+    ipc:           `https://api.estadisticasbcra.com/ipc_ng_mensual?desde=${desde}&hasta=${hasta}`,
+    ipcInteranual: `https://api.estadisticasbcra.com/ipc_ng_interanual?desde=${desde}&hasta=${hasta}`,
+    tem:           `https://api.estadisticasbcra.com/tasa_politica_monetaria?desde=${desde}&hasta=${hasta}`,
+    badlar:        `https://api.estadisticasbcra.com/tasa_badlar?desde=${desde}&hasta=${hasta}`,
+    riesgoPais:    `https://api.estadisticasbcra.com/riesgo_pais?desde=${desde}&hasta=${hasta}`,
+    reservas:      `https://api.estadisticasbcra.com/reservas?desde=${desde}&hasta=${hasta}`,
   };
-
+ 
   if (!endpoint || !endpoints[endpoint]) {
     return new Response(JSON.stringify({ error: "Invalid endpoint" }), { status: 400 });
   }
-
+ 
   try {
     const resp = await fetch(endpoints[endpoint], {
       headers: {
         Accept: "application/json",
-        "User-Agent": "Mozilla/5.0 (compatible; monitor-economico/1.0)"
+        "User-Agent": "Mozilla/5.0 (compatible; monitor/1.0)"
       }
     });
     const text = await resp.text();
@@ -34,7 +42,7 @@ export default async (req) => {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 });
   }
 };
-
+ 
 export const config = {
   path: "/.netlify/functions/proxy"
 };
