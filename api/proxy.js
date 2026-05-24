@@ -4,21 +4,19 @@ export default async function handler(req, res) {
   const today = new Date();
   const yearAgo = new Date(today);
   yearAgo.setFullYear(yearAgo.getFullYear() - 1);
-  const fmt = d => d.toISOString().split("T")[0];
-  const desde = fmt(yearAgo);
-  const hasta = fmt(today);
+  // v4.0 requiere formato date-time ISO completo
+  const desde = yearAgo.toISOString();
+  const hasta = today.toISOString();
 
-  // BCRA API v4.0 (v3.0 deprecada 28/02/2026)
-  // IDs variables: 27=TEM, 28=BADLAR, 29=RiesgoPais, 31=IPC mensual, 30=IPC interanual, 6=Reservas
   const bcraBase = "https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias";
   const endpoints = {
     dolares:       "https://dolarapi.com/v1/dolares",
-    ipc:           `${bcraBase}/31?desde=${desde}&hasta=${hasta}`,
-    ipcInteranual: `${bcraBase}/30?desde=${desde}&hasta=${hasta}`,
-    tem:           `${bcraBase}/27?desde=${desde}&hasta=${hasta}`,
-    badlar:        `${bcraBase}/28?desde=${desde}&hasta=${hasta}`,
-    riesgoPais:    `${bcraBase}/29?desde=${desde}&hasta=${hasta}`,
-    reservas:      `${bcraBase}/6?desde=${desde}&hasta=${hasta}`,
+    ipc:           `${bcraBase}/31?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    ipcInteranual: `${bcraBase}/30?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    tem:           `${bcraBase}/27?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    badlar:        `${bcraBase}/28?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    riesgoPais:    `${bcraBase}/29?Desde=${desde}&Hasta=${hasta}&Limit=500`,
+    reservas:      `${bcraBase}/6?Desde=${desde}&Hasta=${hasta}&Limit=500`,
   };
 
   if (!endpoint || !endpoints[endpoint]) {
@@ -34,15 +32,27 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
+      const text = await response.text();
       return res.status(response.status).json({
         error: `Upstream ${response.status}`,
-        url: endpoints[endpoint]
+        url: endpoints[endpoint],
+        detail: text.slice(0, 200)
       });
     }
 
-    const data = await response.text();
-    res.setHeader("Content-Type", "application/json");
-    res.status(200).send(data);
+    const json = await response.json();
+
+    // v4.0 devuelve: { results: [{ idVariable, detalle: [{fecha, valor}] }] }
+    // Normalizamos a [{fecha, valor}] para que el frontend no cambie
+    let normalized;
+    if (endpoint === 'dolares') {
+      normalized = json; // dolarapi ya viene bien
+    } else {
+      const detalle = json?.results?.[0]?.detalle || [];
+      normalized = { results: detalle }; // {results: [{fecha, valor}]}
+    }
+
+    res.status(200).json(normalized);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
