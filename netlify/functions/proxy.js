@@ -1,27 +1,30 @@
 export default async (req) => {
   const url = new URL(req.url);
-  const target = url.searchParams.get("url");
+  const endpoint = url.searchParams.get("endpoint");
 
-  if (!target) {
-    return new Response(JSON.stringify({ error: "Missing url param" }), {
-      status: 400
+  const endpoints = {
+    // Dólar — dolarapi
+    dolares: "https://dolarapi.com/v1/dolares",
+    // BCRA stats — usando ambito como respaldo
+    ipc:           "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/31/2025-05-24/2026-05-24",
+    ipcInteranual: "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/30/2025-05-24/2026-05-24",
+    tem:           "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/27/2025-05-24/2026-05-24",
+    badlar:        "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/28/2025-05-24/2026-05-24",
+    riesgoPais:    "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/29/2025-05-24/2026-05-24",
+    reservas:      "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable/6/2025-05-24/2026-05-24",
+  };
+
+  if (!endpoint || !endpoints[endpoint]) {
+    return new Response(JSON.stringify({ error: "Invalid endpoint" }), { status: 400 });
+  }
+
+  try {
+    const resp = await fetch(endpoints[endpoint], {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "Mozilla/5.0 (compatible; monitor-economico/1.0)"
+      }
     });
-  }
-
-  const allowed = ["api.bcra.gob.ar", "dolarapi.com"];
-  let targetHost;
-  try {
-    targetHost = new URL(target).hostname;
-  } catch {
-    return new Response(JSON.stringify({ error: "Invalid URL" }), { status: 400 });
-  }
-
-  if (!allowed.includes(targetHost)) {
-    return new Response(JSON.stringify({ error: "Domain not allowed" }), { status: 403 });
-  }
-
-  try {
-    const resp = await fetch(target, { headers: { Accept: "application/json" } });
     const text = await resp.text();
     return new Response(text, {
       status: resp.status,
@@ -35,4 +38,3 @@ export default async (req) => {
 export const config = {
   path: "/.netlify/functions/proxy"
 };
-
