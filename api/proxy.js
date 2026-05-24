@@ -8,14 +8,17 @@ export default async function handler(req, res) {
   const desde = fmt(yearAgo);
   const hasta = fmt(today);
 
+  // BCRA API oficial — variables correctas
+  // 27=TEM, 28=BADLAR, 29=RiesgoPais, 31=IPC mensual, 30=IPC interanual, 6=Reservas
+  const bcraBase = "https://api.bcra.gob.ar/estadisticas/v3.0/datosvariable";
   const endpoints = {
     dolares:       "https://dolarapi.com/v1/dolares",
-    ipc:           `https://api.estadisticasbcra.com/ipc_ng_mensual?desde=${desde}&hasta=${hasta}`,
-    ipcInteranual: `https://api.estadisticasbcra.com/ipc_ng_interanual?desde=${desde}&hasta=${hasta}`,
-    tem:           `https://api.estadisticasbcra.com/tasa_politica_monetaria?desde=${desde}&hasta=${hasta}`,
-    badlar:        `https://api.estadisticasbcra.com/tasa_badlar?desde=${desde}&hasta=${hasta}`,
-    riesgoPais:    `https://api.estadisticasbcra.com/riesgo_pais?desde=${desde}&hasta=${hasta}`,
-    reservas:      `https://api.estadisticasbcra.com/reservas?desde=${desde}&hasta=${hasta}`,
+    ipc:           `${bcraBase}/31/${desde}/${hasta}`,
+    ipcInteranual: `${bcraBase}/30/${desde}/${hasta}`,
+    tem:           `${bcraBase}/27/${desde}/${hasta}`,
+    badlar:        `${bcraBase}/28/${desde}/${hasta}`,
+    riesgoPais:    `${bcraBase}/29/${desde}/${hasta}`,
+    reservas:      `${bcraBase}/6/${desde}/${hasta}`,
   };
 
   if (!endpoint || !endpoints[endpoint]) {
@@ -29,14 +32,24 @@ export default async function handler(req, res) {
     const response = await fetch(endpoints[endpoint], {
       headers: {
         Accept: "application/json",
-        "User-Agent": "Mozilla/5.0 (compatible; monitor-economico/1.0)"
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+        "Origin": "https://www.bcra.gob.ar",
+        "Referer": "https://www.bcra.gob.ar/"
       }
     });
+
+    if (!response.ok) {
+      return res.status(response.status).json({ 
+        error: `Upstream error ${response.status}`,
+        endpoint,
+        url: endpoints[endpoint]
+      });
+    }
+
     const data = await response.text();
     res.setHeader("Content-Type", "application/json");
-    res.status(response.status).send(data);
+    res.status(200).send(data);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
 }
-
