@@ -1,3 +1,4 @@
+// v2
 export default async function handler(req, res) {
   const { endpoint } = req.query;
 
