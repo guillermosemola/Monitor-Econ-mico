@@ -18,6 +18,7 @@
       --warn: #fb923c;
       --danger: #ef4444;
       --ok: #4ade80;
+      --h21: #60a5fa;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -132,6 +133,42 @@
     .btn-save:hover { background:rgba(251,146,60,0.25); }
     .toast { font-size:10px; color:var(--ok); margin-top:6px; display:none; }
 
+    /* H-21 */
+    .h21-card {
+      background: var(--surface); border: 1px solid rgba(96,165,250,0.2);
+      border-radius: 14px; padding: 24px 24px 20px; position: relative; overflow: hidden; transition: border-color 0.2s;
+    }
+    .h21-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--h21), transparent); }
+    .h21-card:hover { border-color: rgba(96,165,250,0.4); }
+    .h21-top { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+    .h21-title { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .h21-value { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--h21); line-height: 1; margin-bottom: 4px; }
+    .h21-unit  { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+    .h21-meta  { font-size: 10px; color: var(--muted); margin-bottom: 16px; }
+    .h21-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    .h21-stat  { background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.12); border-radius: 8px; padding: 9px 12px; }
+    .h21-stat-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .h21-stat-val   { font-size: 14px; color: var(--h21); font-family: 'DM Serif Display', serif; }
+    .h21-chart-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .h21-chart-wrap  { width: 100%; }
+    .btn-edit-h21 { background:transparent; border:1px solid rgba(96,165,250,0.25); color:rgba(96,165,250,0.6); border-radius:6px; padding:6px 12px; cursor:pointer; font-size:10px; font-family:'Space Mono',monospace; transition:all 0.2s; }
+    .btn-edit-h21:hover { border-color:var(--h21); color:var(--h21); }
+    .h21-form { display:none; margin-top:14px; border-top:1px solid rgba(96,165,250,0.15); padding-top:14px; }
+    .form-input-h21:focus { border-color: var(--h21) !important; }
+    .btn-save-h21 { background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.35); color:var(--h21); border-radius:6px; padding:7px 16px; cursor:pointer; font-size:10px; font-family:'Space Mono',monospace; transition:all 0.2s; }
+    .btn-save-h21:hover { background:rgba(96,165,250,0.2); }
+    /* Tabla H-21 */
+    .h21-table-wrap { margin-top: 20px; border-top: 1px solid rgba(96,165,250,0.1); padding-top: 16px; }
+    .h21-table-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .h21-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+    .h21-table th { color: var(--muted); font-weight: 400; text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); font-size: 8px; letter-spacing: 1px; text-transform: uppercase; }
+    .h21-table td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .h21-table tr:first-child td { color: var(--h21); font-weight: 700; }
+    .h21-table tr:last-child td { border-bottom: none; }
+    .var-pos { color: #ef4444; } .var-neg { color: #4ade80; } .var-neu { color: var(--muted); }
+    .mini-bar { height: 4px; width: 80px; border-radius: 2px; background: rgba(96,165,250,0.1); overflow: hidden; }
+    .mini-bar-fill { height: 100%; background: var(--h21); border-radius: 2px; }
+
     /* SKELETON */
     .sk { background:rgba(255,255,255,0.07); border-radius:4px; animation:pulse 1.6s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
@@ -143,6 +180,7 @@
       h1{font-size:26px;}
       .dolar-grid{grid-template-columns:repeat(2,1fr);}
       .ind-grid,.cac-grid{grid-template-columns:1fr;}
+      .h21-top{grid-template-columns:1fr;}
       body{padding:20px 14px 56px;}
     }
   </style>
@@ -252,9 +290,54 @@
 
   </div>
 
+  <!-- ══════════ HORMIGÓN H-21 ══════════ -->
+  <div class="section-label">Hormigón Elaborado H-21 · precio m³ · carga manual mensual</div>
+  <div class="h21-card">
+    <div class="h21-top">
+      <!-- Izquierda: valor + stats + form -->
+      <div>
+        <div class="h21-title">🏗 Hormigón H-21 — Precio m³</div>
+        <div class="h21-value" id="h21-val">—</div>
+        <div class="h21-unit">USD / m³</div>
+        <div class="h21-meta" id="h21-meta">Cargando...</div>
+        <div class="h21-stats">
+          <div class="h21-stat"><div class="h21-stat-label">Var. Mensual</div><div class="h21-stat-val" id="h21-var-mes">—</div></div>
+          <div class="h21-stat"><div class="h21-stat-label">Var. desde Ene-25</div><div class="h21-stat-val" id="h21-var-anual">—</div></div>
+          <div class="h21-stat"><div class="h21-stat-label">Mínimo serie</div><div class="h21-stat-val" id="h21-min">—</div></div>
+          <div class="h21-stat"><div class="h21-stat-label">Máximo serie</div><div class="h21-stat-val" id="h21-max">—</div></div>
+        </div>
+        <div class="cac-actions">
+          <button class="btn-edit-h21" onclick="toggleH21Form()">✎ Agregar mes</button>
+        </div>
+        <div class="h21-form" id="form-h21">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Mes (YYYY-MM)</label><input class="form-input form-input-h21" id="in-h21-mes" type="text" placeholder="ej: 2026-07"/></div>
+            <div class="form-group"><label class="form-label">Etiqueta</label><input class="form-input form-input-h21" id="in-h21-label" type="text" placeholder="ej: Julio 2026"/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Precio USD/m³</label><input class="form-input form-input-h21" id="in-h21-val" type="number" step="0.01" placeholder="ej: 178.50"/></div>
+          </div>
+          <div class="cac-actions">
+            <button class="btn-save-h21" onclick="saveH21()">✓ Guardar</button>
+            <button class="btn-edit-h21" onclick="toggleH21Form()">Cancelar</button>
+          </div>
+          <div class="toast" id="toast-h21">✓ Guardado correctamente</div>
+        </div>
+      </div>
+      <!-- Derecha: gráfico -->
+      <div>
+        <div class="h21-chart-label">Evolución USD/m³ — Ene 2025 → actualidad</div>
+        <div class="h21-chart-wrap" id="h21-chart"></div>
+      </div>
+    </div>
+    <!-- Tabla histórica -->
+    <div class="h21-table-wrap" id="h21-table-wrap"></div>
+  </div>
+
   <div class="footer">
     <div>AUTOMÁTICO — dolarapi.com · api.bcra.gob.ar (BCRA) · IPC INDEC vía BCRA · Riesgo País EMBI JP Morgan</div>
     <div>MANUAL MENSUAL — CAMARCO (camarco.org.ar) · publicación aproximada día 20 de cada mes</div>
+    <div>MANUAL MENSUAL — Hormigón H-21: precio de referencia Tucumán (USD/m³) · fuente: proveedor local · datos desde Ene 2025</div>
     <div>Histórico CAC precargado con datos oficiales CAMARCO Mayo 2025 – Marzo 2026</div>
   </div>
 </div>
@@ -265,8 +348,9 @@
 const SUPA_URL = 'https://wbfnhsgayqabwidkhasg.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZm5oc2dheXFhYndpZGtoYXNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjA3NzEsImV4cCI6MjA5NTI5Njc3MX0.mpxwsvmmxKaDtI7wI72RU_iQ0MuFodIwbHrB6h5nIKs';
 
-async function supaGet(table) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}?select=*`, {
+async function supaGet(table, order) {
+  const qs = order ? `?select=*&order=${order}` : '?select=*';
+  const r = await fetch(`${SUPA_URL}/rest/v1/${table}${qs}`, {
     headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` }
   });
   return r.ok ? r.json() : [];
@@ -578,10 +662,134 @@ async function fetchAll(){
   btn.disabled=false; btn.textContent='↻ Actualizar';
 }
 
+/* ═══════════ HORMIGÓN H-21 ═══════════ */
+let h21Data = [];
+
+function buildChartH21(data, h=80) {
+  if (!data || data.length < 2) return '';
+  const vals = data.map(d => parseFloat(d.valor));
+  const mn = Math.min(...vals), mx = Math.max(...vals), rng = mx - mn || 1;
+  const W = 340;
+  const pts = data.map((d,i) => {
+    const x = (i / (data.length - 1)) * W;
+    const y = h - ((parseFloat(d.valor) - mn) / rng) * (h - 8) - 4;
+    return `${x},${y}`;
+  });
+  const s = pts.join(' L ');
+  const dots = data.map((d,i) => {
+    const x = (i / (data.length - 1)) * W;
+    const y = h - ((parseFloat(d.valor) - mn) / rng) * (h - 8) - 4;
+    const isLast = i === data.length - 1;
+    return `<circle cx="${x}" cy="${y}" r="${isLast ? 4 : 2}" fill="#60a5fa" opacity="${isLast ? 1 : 0.45}"/>`;
+  }).join('');
+  // labels cada 3 meses
+  const labels = data.filter((_,i) => i % 3 === 0 || i === data.length - 1).map(d => {
+    const idx = data.indexOf(d);
+    const x = (idx / (data.length - 1)) * W;
+    const lbl = d.mes_label ? d.mes_label.slice(0,3) + "'" + d.mes_label.slice(-2) : d.mes.slice(2);
+    return `<text x="${x}" y="${h+14}" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="7" font-family="Space Mono,monospace">${lbl}</text>`;
+  }).join('');
+  return `<svg class="minichart" viewBox="0 0 ${W} ${h+20}" height="${h+20}" style="overflow:visible;width:100%">
+    <defs><linearGradient id="gh21" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.02"/>
+    </linearGradient></defs>
+    <path d="M ${s} L ${W},${h} L 0,${h} Z" fill="url(#gh21)"/>
+    <path d="M ${s}" fill="none" stroke="#60a5fa" stroke-width="2"/>
+    ${dots}${labels}
+  </svg>`;
+}
+
+async function loadH21() {
+  try {
+    const rows = await supaGet('hormigon_h21_serie', 'mes.asc');
+    if (!rows || !rows.length) return;
+    h21Data = rows;
+    renderH21();
+  } catch(e) { console.log('Error cargando H-21', e); }
+}
+
+function renderH21() {
+  if (!h21Data.length) return;
+  const data = h21Data;
+  const last = data[data.length - 1];
+  const prev = data.length > 1 ? data[data.length - 2] : null;
+  const first = data[0];
+  const vals = data.map(d => parseFloat(d.valor));
+  const minVal = Math.min(...vals), maxVal = Math.max(...vals);
+  const varMes = prev ? ((parseFloat(last.valor) - parseFloat(prev.valor)) / parseFloat(prev.valor) * 100) : null;
+  const varTotal = ((parseFloat(last.valor) - parseFloat(first.valor)) / parseFloat(first.valor) * 100);
+
+  document.getElementById('h21-val').textContent = 'USD ' + fmtNum(last.valor, 2);
+  document.getElementById('h21-meta').textContent = (last.mes_label || last.mes) + ' · precio m³ Tucumán';
+
+  const vmEl = document.getElementById('h21-var-mes');
+  if (varMes !== null) {
+    const sign = varMes >= 0 ? '+' : '';
+    vmEl.textContent = sign + varMes.toFixed(1) + '%';
+    vmEl.style.color = varMes > 5 ? '#ef4444' : varMes > 0 ? '#fb923c' : '#4ade80';
+  }
+  const vaEl = document.getElementById('h21-var-anual');
+  vaEl.textContent = (varTotal >= 0 ? '+' : '') + varTotal.toFixed(1) + '%';
+  vaEl.style.color = varTotal > 30 ? '#ef4444' : varTotal > 0 ? '#fb923c' : '#4ade80';
+
+  document.getElementById('h21-min').textContent = 'USD ' + fmtNum(minVal, 2);
+  document.getElementById('h21-max').textContent = 'USD ' + fmtNum(maxVal, 2);
+  document.getElementById('h21-chart').innerHTML = buildChartH21(data, 80);
+
+  // Tabla (orden descendente)
+  const rows = [...data].reverse().map((row, i) => {
+    const idx = data.indexOf(row);
+    const prevRow = idx > 0 ? data[idx - 1] : null;
+    const vp = prevRow ? ((parseFloat(row.valor) - parseFloat(prevRow.valor)) / parseFloat(prevRow.valor) * 100) : null;
+    const vpStr = vp !== null ? (vp >= 0 ? '+' : '') + vp.toFixed(1) + '%' : '—';
+    const vpClass = vp === null ? 'var-neu' : vp > 0 ? 'var-pos' : 'var-neg';
+    const barPct = ((parseFloat(row.valor) - minVal) / (maxVal - minVal || 1) * 100).toFixed(0);
+    return `<tr${i===0?' style="background:rgba(96,165,250,0.05)"':''}>
+      <td>${row.mes_label || row.mes}</td>
+      <td><strong>USD ${fmtNum(row.valor, 2)}</strong></td>
+      <td class="${vpClass}">${vpStr}</td>
+      <td><div class="mini-bar"><div class="mini-bar-fill" style="width:${barPct}%"></div></div></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('h21-table-wrap').innerHTML = `
+    <div class="h21-table-label">Serie completa · ${data.length} registros · ${first.mes_label||first.mes} → ${last.mes_label||last.mes}</div>
+    <table class="h21-table">
+      <thead><tr><th>Período</th><th>Precio m³</th><th>Var. mensual</th><th>Nivel relativo</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+}
+
+function toggleH21Form() {
+  const f = document.getElementById('form-h21');
+  f.style.display = (f.style.display === 'none' || !f.style.display) ? 'block' : 'none';
+}
+
+async function saveH21() {
+  const mes   = document.getElementById('in-h21-mes').value.trim();
+  const label = document.getElementById('in-h21-label').value.trim();
+  const val   = parseFloat(document.getElementById('in-h21-val').value);
+  if (!mes || !val) return;
+  try {
+    await supaUpsert('hormigon_h21_serie', {
+      mes, mes_label: label || mes, valor: val, updated_at: new Date().toISOString()
+    });
+    await loadH21();
+    toggleH21Form();
+    document.getElementById('in-h21-mes').value = '';
+    document.getElementById('in-h21-label').value = '';
+    document.getElementById('in-h21-val').value = '';
+    const t = document.getElementById('toast-h21');
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 2500);
+  } catch(e) { console.log('Error guardando H-21', e); }
+}
+
 /* INIT */
 renderCACCards();
 fetchAll();
 loadCACFromSupabase();
+loadH21();
 </script>
 </body>
 </html>
