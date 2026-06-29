@@ -330,8 +330,6 @@
         <div class="h21-chart-wrap" id="h21-chart"></div>
       </div>
     </div>
-    <!-- Tabla histórica -->
-    <div class="h21-table-wrap" id="h21-table-wrap"></div>
   </div>
 
   <div class="footer">
@@ -736,28 +734,6 @@ function renderH21() {
   document.getElementById('h21-min').textContent = fmtNum(minVal, 2) + ' pts';
   document.getElementById('h21-max').textContent = fmtNum(maxVal, 2) + ' pts';
   document.getElementById('h21-chart').innerHTML = buildChartH21(data, 80);
-
-  // Tabla (orden descendente)
-  const rows = [...data].reverse().map((row, i) => {
-    const idx = data.indexOf(row);
-    const prevRow = idx > 0 ? data[idx - 1] : null;
-    const vp = prevRow ? ((parseFloat(row.valor) - parseFloat(prevRow.valor)) / parseFloat(prevRow.valor) * 100) : null;
-    const vpStr = vp !== null ? (vp >= 0 ? '+' : '') + vp.toFixed(1) + '%' : '—';
-    const vpClass = vp === null ? 'var-neu' : vp > 0 ? 'var-pos' : 'var-neg';
-    const barPct = ((parseFloat(row.valor) - minVal) / (maxVal - minVal || 1) * 100).toFixed(0);
-    return `<tr${i===0?' style="background:rgba(96,165,250,0.05)"':''}>
-      <td>${row.mes_label || row.mes}</td>
-      <td><strong>${fmtNum(row.valor, 2)}</strong></td>
-      <td class="${vpClass}">${vpStr}</td>
-      <td><div class="mini-bar"><div class="mini-bar-fill" style="width:${barPct}%"></div></div></td>
-    </tr>`;
-  }).join('');
-  document.getElementById('h21-table-wrap').innerHTML = `
-    <div class="h21-table-label">Serie completa · ${data.length} registros · ${first.mes_label||first.mes} → ${last.mes_label||last.mes}</div>
-    <table class="h21-table">
-      <thead><tr><th>Período</th><th>Precio m³</th><th>Var. mensual</th><th>Nivel relativo</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
 }
 
 function toggleH21Form() {
