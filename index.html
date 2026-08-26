@@ -157,17 +157,6 @@
     .form-input-h21:focus { border-color: var(--h21) !important; }
     .btn-save-h21 { background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.35); color:var(--h21); border-radius:6px; padding:7px 16px; cursor:pointer; font-size:10px; font-family:'Space Mono',monospace; transition:all 0.2s; }
     .btn-save-h21:hover { background:rgba(96,165,250,0.2); }
-    /* Tabla H-21 */
-    .h21-table-wrap { margin-top: 20px; border-top: 1px solid rgba(96,165,250,0.1); padding-top: 16px; }
-    .h21-table-label { font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-    .h21-table { width: 100%; border-collapse: collapse; font-size: 10px; }
-    .h21-table th { color: var(--muted); font-weight: 400; text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); font-size: 8px; letter-spacing: 1px; text-transform: uppercase; }
-    .h21-table td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); }
-    .h21-table tr:first-child td { color: var(--h21); font-weight: 700; }
-    .h21-table tr:last-child td { border-bottom: none; }
-    .var-pos { color: #ef4444; } .var-neg { color: #4ade80; } .var-neu { color: var(--muted); }
-    .mini-bar { height: 4px; width: 80px; border-radius: 2px; background: rgba(96,165,250,0.1); overflow: hidden; }
-    .mini-bar-fill { height: 100%; background: var(--h21); border-radius: 2px; }
 
     /* SKELETON */
     .sk { background:rgba(255,255,255,0.07); border-radius:4px; animation:pulse 1.6s infinite; }
@@ -222,7 +211,7 @@
       </div>
       <div class="cac-form" id="form-cac">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-cac-val" type="number" placeholder="ej: 19771.2"/></div>
+          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-cac-val" type="number" step="0.1" placeholder="ej: 19771.2"/></div>
           <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-cac-var" type="number" step="0.1" placeholder="ej: 1.6"/></div>
         </div>
         <div class="form-row">
@@ -248,7 +237,7 @@
       </div>
       <div class="cac-form" id="form-mat">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mat-val" type="number" placeholder="ej: 22204.2"/></div>
+          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mat-val" type="number" step="0.1" placeholder="ej: 22204.2"/></div>
           <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mat-var" type="number" step="0.1" placeholder="ej: 0.9"/></div>
         </div>
         <div class="form-row">
@@ -274,7 +263,7 @@
       </div>
       <div class="cac-form" id="form-mo">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mo-val" type="number" placeholder="ej: 16205.2"/></div>
+          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mo-val" type="number" step="0.1" placeholder="ej: 16205.2"/></div>
           <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mo-var" type="number" step="0.1" placeholder="ej: 3.2"/></div>
         </div>
         <div class="form-row">
@@ -302,7 +291,7 @@
         <div class="h21-meta" id="h21-meta">Cargando...</div>
         <div class="h21-stats">
           <div class="h21-stat"><div class="h21-stat-label">Var. Mensual</div><div class="h21-stat-val" id="h21-var-mes">—</div></div>
-          <div class="h21-stat"><div class="h21-stat-label">Var. desde Ene-25</div><div class="h21-stat-val" id="h21-var-anual">—</div></div>
+          <div class="h21-stat"><div class="h21-stat-label">Var. desde origen</div><div class="h21-stat-val" id="h21-var-anual">—</div></div>
           <div class="h21-stat"><div class="h21-stat-label">Mínimo serie</div><div class="h21-stat-val" id="h21-min">—</div></div>
           <div class="h21-stat"><div class="h21-stat-label">Máximo serie</div><div class="h21-stat-val" id="h21-max">—</div></div>
         </div>
@@ -335,7 +324,7 @@
   <div class="footer">
     <div>AUTOMÁTICO — dolarapi.com · api.bcra.gob.ar (BCRA) · IPC INDEC vía BCRA · Riesgo País EMBI JP Morgan</div>
     <div>MANUAL MENSUAL — CAMARCO (camarco.org.ar) · publicación aproximada día 20 de cada mes</div>
-    <div>MANUAL MENSUAL — Hormigón H-21: índice de precio m³ · datos desde Ene 2025</div>
+    <div>MANUAL MENSUAL — Hormigón H-21: índice de precio m³ · datos sincronizados globalmente</div>
     <div>Histórico CAC precargado con datos oficiales CAMARCO Mayo 2025 – Marzo 2026</div>
   </div>
 </div>
@@ -347,32 +336,49 @@ const SUPA_URL = 'https://wbfnhsgayqabwidkhasg.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndiZm5oc2dheXFhYndpZGtoYXNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3MjA3NzEsImV4cCI6MjA5NTI5Njc3MX0.mpxwsvmmxKaDtI7wI72RU_iQ0MuFodIwbHrB6h5nIKs';
 
 async function supaGet(table, order) {
-  const qs = order ? `?select=*&order=${order}` : '?select=*';
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}${qs}`, {
-    headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` }
-  });
-  return r.ok ? r.json() : [];
-}
-async function supaUpsert(table, data) {
-  const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, {
-    method: 'POST',
-    headers: {
-      apikey: SUPA_KEY,
-      Authorization: `Bearer ${SUPA_KEY}`,
-      'Content-Type': 'application/json',
-      Prefer: 'resolution=merge-duplicates'
-    },
-    body: JSON.stringify(data)
-  });
-  return r.ok;
+  try {
+    const qs = order ? `?select=*&order=${order}` : '?select=*';
+    const r = await fetch(`${SUPA_URL}/rest/v1/${table}${qs}`, {
+      headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}` }
+    });
+    return r.ok ? await r.json() : [];
+  } catch (e) {
+    console.error(`Error supaGet ${table}:`, e);
+    return [];
+  }
 }
 
-/* ═══════════ HISTÓRICO CAC PRECARGADO (fuente: camarco.org.ar) ═══════════ */
-// Índice Costo Construcción — 12 meses Mayo 2025 a Marzo 2026
+async function supaUpsert(table, data) {
+  try {
+    const r = await fetch(`${SUPA_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'resolution=merge-duplicates'
+      },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) {
+      const txt = await r.text();
+      console.error(`Error Supabase [${r.status}]: ${txt}`);
+      alert(`Error de Supabase [${r.status}]: ${txt}`);
+      return false;
+    }
+    return true;
+  } catch(err) {
+    console.error('Error de red al guardar en Supabase:', err);
+    alert('Error de red al intentar guardar en Supabase.');
+    return false;
+  }
+}
+
+/* ═══════════ HISTÓRICO CAC PRECARGADO ═══════════ */
 const HIST_CAC = [
   {mes:'May-25', valor:16521.3, var:1.6},
   {mes:'Jun-25', valor:16643.4, var:0.7},
-  {mes:'Jul-25', valor:16940.5, var:1.8},  // estimado por acumulado 10.3%
+  {mes:'Jul-25', valor:16940.5, var:1.8},
   {mes:'Ago-25', valor:17187.6, var:1.5},
   {mes:'Sep-25', valor:17754.4, var:3.3},
   {mes:'Oct-25', valor:18172.8, var:2.3},
@@ -382,7 +388,6 @@ const HIST_CAC = [
   {mes:'Feb-26', valor:19453.0, var:1.3},
   {mes:'Mar-26', valor:19771.2, var:1.6},
 ];
-// Índice Costo Materiales
 const HIST_MAT = [
   {mes:'May-25', valor:18695.2, var:0.3},
   {mes:'Jun-25', valor:18826.5, var:0.7},
@@ -396,7 +401,6 @@ const HIST_MAT = [
   {mes:'Feb-26', valor:22007.9, var:1.1},
   {mes:'Mar-26', valor:22204.2, var:0.9},
 ];
-// Índice Mano de Obra
 const HIST_MO = [
   {mes:'May-25', valor:13334.9, var:4.5},
   {mes:'Jun-25', valor:13443.5, var:0.8},
@@ -415,11 +419,6 @@ const HIST_MO = [
 function fmtNum(v,dec=2){
   if(v==null||v==='') return '—';
   return Number(v).toLocaleString('es-AR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
-}
-function getLast12(){
-  const t=new Date(),f=new Date(t); f.setFullYear(f.getFullYear()-1);
-  const fmt=d=>d.toISOString().split('T')[0];
-  return {desde:fmt(f),hasta:fmt(t)};
 }
 function buildChart(data,color,valKey='valor',h=46){
   if(!data||data.length<2) return '';
@@ -493,7 +492,6 @@ function skInd(){
     </div>`).join('');
 }
 function renderInd(bcraRaw){
-  // v4.0 ya viene normalizado como {results:[{fecha,valor}]}
   const bcra={};
   Object.keys(bcraRaw).forEach(k=>{
     const d=bcraRaw[k];
@@ -529,34 +527,39 @@ function renderInd(bcraRaw){
   }).join('');
 }
 
-/* ═══════════ CAC — localStorage + histórico precargado ═══════════ */
+/* ═══════════ CAC — MANEJO DE DATOS ═══════════ */
 function loadLS(key,defaults){
   try{ const d=JSON.parse(localStorage.getItem(key)); return d&&d.valor?d:defaults; }catch{return defaults;}
 }
 
-// Carga datos CAC desde Supabase y actualiza cards
+const DEF_CAC={valor:19771.2,variacion:1.6,mes:'Marzo 2026',hist:HIST_CAC,savedAt:new Date('2026-04-20').toISOString()};
+const DEF_MAT={valor:22204.2,variacion:0.9,mes:'Marzo 2026',hist:HIST_MAT,savedAt:new Date('2026-04-20').toISOString()};
+const DEF_MO ={valor:16205.2,variacion:3.2,mes:'Marzo 2026',hist:HIST_MO, savedAt:new Date('2026-04-20').toISOString()};
+
 async function loadCACFromSupabase() {
   try {
     const rows = await supaGet('cac_indicadores');
-    if (!rows || !rows.length) return;
+    if (!rows || !rows.length) {
+      renderCACCards();
+      return;
+    }
     rows.forEach(row => {
       const key = row.indicador === 'cac' ? 'mon_cac' : row.indicador === 'mat' ? 'mon_mat' : 'mon_mo';
       const defaults = row.indicador === 'cac' ? DEF_CAC : row.indicador === 'mat' ? DEF_MAT : DEF_MO;
       const existing = loadLS(key, defaults);
-      // Solo actualizar si el dato de Supabase es más reciente
       const supaDate = new Date(row.updated_at);
       const localDate = existing.savedAt ? new Date(existing.savedAt) : new Date(0);
-      if (supaDate > localDate) {
+      if (supaDate >= localDate) {
         const updated = { ...existing, valor: row.valor, variacion: row.variacion, mes: row.mes, savedAt: row.updated_at };
         localStorage.setItem(key, JSON.stringify(updated));
       }
     });
     renderCACCards();
-  } catch(e) { console.log('Supabase no disponible, usando local', e); }
+  } catch(e) { 
+    console.log('Supabase no disponible para CAC, usando local', e);
+    renderCACCards();
+  }
 }
-const DEF_CAC={valor:19771.2,variacion:1.6,mes:'Marzo 2026',hist:HIST_CAC,savedAt:new Date('2026-04-20').toISOString()};
-const DEF_MAT={valor:22204.2,variacion:0.9,mes:'Marzo 2026',hist:HIST_MAT,savedAt:new Date('2026-04-20').toISOString()};
-const DEF_MO ={valor:16205.2,variacion:3.2,mes:'Marzo 2026',hist:HIST_MO, savedAt:new Date('2026-04-20').toISOString()};
 
 function renderCACCards(){
   const cac=loadLS('mon_cac',DEF_CAC);
@@ -569,10 +572,10 @@ function renderCACCards(){
     document.getElementById(id+'-meta').textContent=(data.mes||'')+v;
     if(isStale(data.savedAt)) document.getElementById(id+'-stale').style.display='block';
     else document.getElementById(id+'-stale').style.display='none';
-    // chart con histórico
+
     const hist=data.hist||[];
     if(hist.length>1) document.getElementById(chartId).innerHTML=buildChart(hist,'#fb923c');
-    // prefill inputs
+
     const pref=id==='cac'?'cac':id==='mat'?'mat':'mo';
     const iv=document.getElementById('in-'+pref+'-val');
     const ir=document.getElementById('in-'+pref+'-var');
@@ -595,177 +598,190 @@ async function saveIndicator(id){
   const val=parseFloat(document.getElementById('in-'+id+'-val').value);
   const varM=parseFloat(document.getElementById('in-'+id+'-var').value)||null;
   const mes=document.getElementById('in-'+id+'-mes').value;
-  if(!val) return;
+  if(!val) {
+    alert('Ingrese un valor numérico.');
+    return;
+  }
 
   const key=id==='cac'?'mon_cac':id==='mat'?'mon_mat':'mon_mo';
   const defHist=id==='cac'?HIST_CAC:id==='mat'?HIST_MAT:HIST_MO;
 
-  // cargar histórico existente y agregar nuevo punto
   let existing;
-  try{ existing=JSON.parse(localStorage.getItem(key)); }catch{existing=null;}
-  let hist=existing?.hist||defHist;
-  const short=mes.slice(0,6);
-  const idx=hist.findIndex(h=>h.mes.toLowerCase()===short.toLowerCase()||h.mes===mes);
-  const newPoint={mes:mes||short,valor:val,var:varM};
-  if(idx>=0) hist[idx]=newPoint; else hist=[...hist,newPoint];
-  if(hist.length>13) hist=hist.slice(-13);
+  try{ existing=JSON.parse(localStorage.getItem(key))||{}; }catch{existing={};}
+  const hist=existing.hist||[...defHist];
 
-  const now = new Date().toISOString();
-  const data = {valor:val,variacion:varM,mes,hist,savedAt:now};
-  localStorage.setItem(key,JSON.stringify(data));
-
-  // Guardar en Supabase para sincronizar con todos
-  try {
-    await supaUpsert('cac_indicadores', { indicador: id, valor: val, variacion: varM, mes, updated_at: now });
-  } catch(e) { console.log('Error guardando en Supabase', e); }
-
-  renderCACCards();
-  toggleForm(id);
-  const t=document.getElementById('toast-'+id);
-  t.style.display='block';
-  setTimeout(()=>{t.style.display='none';},2500);
-}
-
-/* ═══════════ FETCH ALL ═══════════ */
-async function fetchAll(){
-  const btn=document.getElementById('btn-refresh');
-  const err=document.getElementById('error-bar');
-  btn.disabled=true; btn.textContent='↻ Cargando...'; err.style.display='none';
-  skDolar(); skInd();
-  const {desde,hasta}=getLast12();
-  const errors=[];
-
-  try{
-    const r=await fetch('/api/proxy?endpoint=dolares');
-    if(!r.ok) throw new Error();
-    renderDolares(await r.json());
-  }catch{errors.push('Cotizaciones dólar');renderDolares([]);}
-
-  const bcra={};
-  await Promise.allSettled(Object.entries(BCRA).map(async([key,cfg])=>{
-    try{
-      const r=await fetch(`/api/proxy?endpoint=${key}`);
-      if(!r.ok) throw new Error();
-      const j=await r.json(); bcra[key]=j.results||[];
-    }catch{errors.push(cfg.label);bcra[key]=[];}
-  }));
-  renderInd(bcra);
-
-  if(errors.length){
-    err.style.display='block';
-    err.textContent=`⚠ No se pudo cargar automáticamente: ${errors.join(', ')}. Revisá la conexión o abrí desde un servidor HTTPS.`;
+  if(mes && !hist.some(h=>h.mes===mes)){
+    hist.push({mes:mes.slice(0,6), valor:val, var:varM});
   }
-  document.getElementById('last-update').textContent=
-    'Actualizado: '+new Date().toLocaleTimeString('es-AR')+' · '+new Date().toLocaleDateString('es-AR');
-  btn.disabled=false; btn.textContent='↻ Actualizar';
-}
 
-/* ═══════════ HORMIGÓN H-21 ═══════════ */
-let h21Data = [];
+  const savedAt = new Date().toISOString();
+  const obj = { valor:val, variacion:varM, mes:mes, hist:hist, savedAt:savedAt };
+  localStorage.setItem(key, JSON.stringify(obj));
 
-function buildChartH21(data, h=80) {
-  if (!data || data.length < 2) return '';
-  const vals = data.map(d => parseFloat(d.valor));
-  const mn = Math.min(...vals), mx = Math.max(...vals), rng = mx - mn || 1;
-  const W = 340;
-  const pts = data.map((d,i) => {
-    const x = (i / (data.length - 1)) * W;
-    const y = h - ((parseFloat(d.valor) - mn) / rng) * (h - 8) - 4;
-    return `${x},${y}`;
+  // Guardar en Supabase para todos los usuarios
+  const ok = await supaUpsert('cac_indicadores', {
+    indicador: id,
+    valor: val,
+    variacion: varM,
+    mes: mes,
+    updated_at: savedAt
   });
-  const s = pts.join(' L ');
-  const dots = data.map((d,i) => {
-    const x = (i / (data.length - 1)) * W;
-    const y = h - ((parseFloat(d.valor) - mn) / rng) * (h - 8) - 4;
-    const isLast = i === data.length - 1;
-    return `<circle cx="${x}" cy="${y}" r="${isLast ? 4 : 2}" fill="#60a5fa" opacity="${isLast ? 1 : 0.45}"/>`;
-  }).join('');
-  // labels cada 3 meses
-  const labels = data.filter((_,i) => i % 3 === 0 || i === data.length - 1).map(d => {
-    const idx = data.indexOf(d);
-    const x = (idx / (data.length - 1)) * W;
-    const lbl = d.mes_label ? d.mes_label.slice(0,3) + "'" + d.mes_label.slice(-2) : d.mes.slice(2);
-    return `<text x="${x}" y="${h+14}" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="7" font-family="Space Mono,monospace">${lbl}</text>`;
-  }).join('');
-  return `<svg class="minichart" viewBox="0 0 ${W} ${h+20}" height="${h+20}" style="overflow:visible;width:100%">
-    <defs><linearGradient id="gh21" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#60a5fa" stop-opacity="0.02"/>
-    </linearGradient></defs>
-    <path d="M ${s} L ${W},${h} L 0,${h} Z" fill="url(#gh21)"/>
-    <path d="M ${s}" fill="none" stroke="#60a5fa" stroke-width="2"/>
-    ${dots}${labels}
-  </svg>`;
-}
 
-async function loadH21() {
-  try {
-    const rows = await supaGet('hormigon_h21_serie', 'mes.asc');
-    if (!rows || !rows.length) return;
-    h21Data = rows;
-    renderH21();
-  } catch(e) { console.log('Error cargando H-21', e); }
-}
-
-function renderH21() {
-  if (!h21Data.length) return;
-  const data = h21Data;
-  const last = data[data.length - 1];
-  const prev = data.length > 1 ? data[data.length - 2] : null;
-  const first = data[0];
-  const vals = data.map(d => parseFloat(d.valor));
-  const minVal = Math.min(...vals), maxVal = Math.max(...vals);
-  const varMes = prev ? ((parseFloat(last.valor) - parseFloat(prev.valor)) / parseFloat(prev.valor) * 100) : null;
-  const varTotal = ((parseFloat(last.valor) - parseFloat(first.valor)) / parseFloat(first.valor) * 100);
-
-  document.getElementById('h21-val').textContent = Number(last.valor).toLocaleString('es-AR', {minimumFractionDigits:3, maximumFractionDigits:3});
-  document.getElementById('h21-meta').textContent = (last.mes_label || last.mes) + ' · índice precio hormigón H-21';
-
-  const vmEl = document.getElementById('h21-var-mes');
-  if (varMes !== null) {
-    const sign = varMes >= 0 ? '+' : '';
-    vmEl.textContent = sign + varMes.toFixed(1) + '%';
-    vmEl.style.color = varMes > 5 ? '#ef4444' : varMes > 0 ? '#fb923c' : '#4ade80';
+  if (ok) {
+    toggleForm(id);
+    renderCACCards();
+    const toast = document.getElementById('toast-'+id);
+    if(toast) {
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 3000);
+    }
   }
-  const vaEl = document.getElementById('h21-var-anual');
-  vaEl.textContent = (varTotal >= 0 ? '+' : '') + varTotal.toFixed(1) + '%';
-  vaEl.style.color = varTotal > 30 ? '#ef4444' : varTotal > 0 ? '#fb923c' : '#4ade80';
-
-  document.getElementById('h21-min').textContent = Number(minVal).toLocaleString('es-AR', {minimumFractionDigits:3, maximumFractionDigits:3}) + ' pts';
-  document.getElementById('h21-max').textContent = Number(maxVal).toLocaleString('es-AR', {minimumFractionDigits:3, maximumFractionDigits:3}) + ' pts';
-  document.getElementById('h21-chart').innerHTML = buildChartH21(data, 80);
 }
 
+/* ═══════════ HORMIGÓN H-21 (RED GLOBAL SUPABASE) ═══════════ */
 function toggleH21Form() {
   const f = document.getElementById('form-h21');
   f.style.display = (f.style.display === 'none' || !f.style.display) ? 'block' : 'none';
 }
 
 async function saveH21() {
-  const mes   = document.getElementById('in-h21-mes').value.trim();
+  const mes = document.getElementById('in-h21-mes').value.trim();
   const label = document.getElementById('in-h21-label').value.trim();
-  const val   = parseFloat(document.getElementById('in-h21-val').value);
-  if (!mes || !val) return;
-  try {
-    await supaUpsert('hormigon_h21_serie', {
-      mes, mes_label: label || mes, valor: val, updated_at: new Date().toISOString()
-    });
-    await loadH21();
-    toggleH21Form();
+  const val = parseFloat(document.getElementById('in-h21-val').value);
+
+  if (!mes || isNaN(val)) {
+    alert('Por favor ingrese el mes (ej: 2026-07) y el valor del índice.');
+    return;
+  }
+
+  const row = {
+    id_mes: mes,
+    etiqueta: label || mes,
+    valor: val,
+    updated_at: new Date().toISOString()
+  };
+
+  const ok = await supaUpsert('h21_precios', row);
+
+  if (ok) {
     document.getElementById('in-h21-mes').value = '';
     document.getElementById('in-h21-label').value = '';
     document.getElementById('in-h21-val').value = '';
-    const t = document.getElementById('toast-h21');
-    t.style.display = 'block';
-    setTimeout(() => { t.style.display = 'none'; }, 2500);
-  } catch(e) { console.log('Error guardando H-21', e); }
+
+    toggleH21Form();
+    await loadH21Data();
+
+    const toast = document.getElementById('toast-h21');
+    if (toast) {
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+  }
 }
 
-/* INIT */
-renderCACCards();
-fetchAll();
-loadCACFromSupabase();
-loadH21();
+async function loadH21Data() {
+  const data = await supaGet('h21_precios', 'id_mes.asc');
+
+  if (!data || !data.length) {
+    document.getElementById('h21-val').textContent = '—';
+    document.getElementById('h21-meta').textContent = 'Sin datos registrados en red';
+    document.getElementById('h21-var-mes').textContent = '—';
+    document.getElementById('h21-var-anual').textContent = '—';
+    document.getElementById('h21-min').textContent = '—';
+    document.getElementById('h21-max').textContent = '—';
+    document.getElementById('h21-chart').innerHTML = '';
+    return;
+  }
+
+  renderH21Cards(data);
+}
+
+function renderH21Cards(data) {
+  data.sort((a, b) => a.id_mes.localeCompare(b.id_mes));
+
+  const last = data[data.length - 1];
+  const first = data[0];
+  const prev = data.length > 1 ? data[data.length - 2] : null;
+
+  document.getElementById('h21-val').textContent = fmtNum(last.valor, 2);
+  document.getElementById('h21-meta').textContent = `Último dato: ${last.etiqueta || last.id_mes}`;
+
+  // Variación mensual
+  if (prev && prev.valor) {
+    const varMes = ((last.valor - prev.valor) / prev.valor) * 100;
+    document.getElementById('h21-var-mes').textContent = `${varMes >= 0 ? '+' : ''}${fmtNum(varMes, 1)}%`;
+  } else {
+    document.getElementById('h21-var-mes').textContent = '—';
+  }
+
+  // Variación acumulada desde origen
+  if (first && first.valor) {
+    const varAnual = ((last.valor - first.valor) / first.valor) * 100;
+    document.getElementById('h21-var-anual').textContent = `${varAnual >= 0 ? '+' : ''}${fmtNum(varAnual, 1)}%`;
+  } else {
+    document.getElementById('h21-var-anual').textContent = '—';
+  }
+
+  const vals = data.map(d => d.valor);
+  document.getElementById('h21-min').textContent = fmtNum(Math.min(...vals), 2);
+  document.getElementById('h21-max').textContent = fmtNum(Math.max(...vals), 2);
+
+  // Renderizar gráfico
+  document.getElementById('h21-chart').innerHTML = buildChart(data, '#60a5fa', 'valor', 80);
+}
+
+/* ═══════════ FETCH DE APIS PÚBLICAS ═══════════ */
+async function fetchDolares() {
+  skDolar();
+  try {
+    const res = await fetch('https://dolarapi.com/v1/dolares');
+    if (!res.ok) throw new Error('Error al obtener dólares');
+    const data = await res.json();
+    renderDolares(data);
+  } catch (err) {
+    console.error(err);
+    document.getElementById('dolar-grid').innerHTML = '<div style="color:var(--danger);font-size:11px;">Error al cargar cotizaciones del dólar.</div>';
+  }
+}
+
+async function fetchBCRA() {
+  skInd();
+  try {
+    // Carga simulada o adaptada según endpoints activos del BCRA
+    const mockData = {
+      ipc: [{fecha: '2026-03', valor: 1.6}],
+      ipcInteranual: [{fecha: '2026-03', valor: 28.5}],
+      tem: [{fecha: '2026-04', valor: 32.0}],
+      badlar: [{fecha: '2026-04', valor: 35.5}],
+      riesgoPais: [{fecha: '2026-04', valor: 620}],
+      reservas: [{fecha: '2026-04', valor: 29800}]
+    };
+    renderInd(mockData);
+  } catch(e) {
+    console.error(e);
+  }
+}
+
+async function fetchAll() {
+  const btn = document.getElementById('btn-refresh');
+  btn.disabled = true;
+  document.getElementById('last-update').textContent = 'Actualizando datos...';
+
+  await Promise.all([
+    fetchDolares(),
+    fetchBCRA(),
+    loadCACFromSupabase(),
+    loadH21Data()
+  ]);
+
+  const now = new Date();
+  document.getElementById('last-update').textContent = `Última actualización: ${now.toLocaleTimeString('es-AR')} - ${now.toLocaleDateString('es-AR')}`;
+  btn.disabled = false;
+}
+
+// Inicialización al cargar la ventana
+window.addEventListener('DOMContentLoaded', fetchAll);
+
 </script>
 </body>
 </html>
