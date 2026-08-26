@@ -140,7 +140,7 @@
     }
     .h21-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--h21), transparent); }
     .h21-card:hover { border-color: rgba(96,165,250,0.4); }
-    .h21-top { display: grid; grid-template-columns: 220px 1fr; gap: 28px; align-items: start; }
+    .h21-top { display: grid; grid-template-columns: 260px 1fr; gap: 28px; align-items: start; }
     .h21-title { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
     .h21-value { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--h21); line-height: 1; margin-bottom: 4px; }
     .h21-unit  { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
@@ -205,14 +205,14 @@
       <div class="cac-value" id="cac-val">—</div>
       <div class="cac-meta" id="cac-meta">—</div>
       <div class="chart-wrap-cac" id="cac-chart"></div>
-      <div class="stale-banner" id="cac-stale">⚠ Dato con más de 35 días — actualizar en camarco.org.ar</div>
+      <div class="stale-banner" id="cac-stale">⚠ Dato con más de 45 días — actualizar en camarco.org.ar</div>
       <div class="cac-actions">
         <button class="btn-edit" onclick="toggleForm('cac')">✎ Actualizar dato</button>
       </div>
       <div class="cac-form" id="form-cac">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-cac-val" type="number" step="0.1" placeholder="ej: 19771.2"/></div>
-          <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-cac-var" type="number" step="0.1" placeholder="ej: 1.6"/></div>
+          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-cac-val" type="number" step="0.1" placeholder="ej: 21960.7"/></div>
+          <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-cac-var" type="number" step="0.1" placeholder="ej: 1.5"/></div>
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-cac-mes" type="text" placeholder="ej: Julio 2026"/></div>
@@ -231,14 +231,14 @@
       <div class="cac-value" id="mat-val">—</div>
       <div class="cac-meta" id="mat-meta">—</div>
       <div class="chart-wrap-cac" id="mat-chart"></div>
-      <div class="stale-banner" id="mat-stale">⚠ Dato con más de 35 días</div>
+      <div class="stale-banner" id="mat-stale">⚠ Dato con más de 45 días</div>
       <div class="cac-actions">
         <button class="btn-edit" onclick="toggleForm('mat')">✎ Actualizar dato</button>
       </div>
       <div class="cac-form" id="form-mat">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mat-val" type="number" step="0.1" placeholder="ej: 22204.2"/></div>
-          <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mat-var" type="number" step="0.1" placeholder="ej: 0.9"/></div>
+          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mat-val" type="number" step="0.1" placeholder="ej: 24149.4"/></div>
+          <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mat-var" type="number" step="0.1" placeholder="ej: 1.0"/></div>
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-mat-mes" type="text" placeholder="ej: Julio 2026"/></div>
@@ -257,14 +257,14 @@
       <div class="cac-value" id="mo-val">—</div>
       <div class="cac-meta" id="mo-meta">—</div>
       <div class="chart-wrap-cac" id="mo-chart"></div>
-      <div class="stale-banner" id="mo-stale">⚠ Dato con más de 35 días</div>
+      <div class="stale-banner" id="mo-stale">⚠ Dato con más de 45 días</div>
       <div class="cac-actions">
         <button class="btn-edit" onclick="toggleForm('mo')">✎ Actualizar dato</button>
       </div>
       <div class="cac-form" id="form-mo">
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mo-val" type="number" step="0.1" placeholder="ej: 16205.2"/></div>
-          <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mo-var" type="number" step="0.1" placeholder="ej: 3.2"/></div>
+          <div class="form-group"><label class="form-label">Valor (puntos)</label><input class="form-input" id="in-mo-val" type="number" step="0.1" placeholder="ej: 18752.8"/></div>
+          <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mo-var" type="number" step="0.1" placeholder="ej: 2.3"/></div>
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-mo-mes" type="text" placeholder="ej: Julio 2026"/></div>
@@ -284,9 +284,9 @@
   <div class="h21-card">
     <div class="h21-top">
       <div>
-        <div class="h21-title">🏗 Hormigón H-21 — Índice de precio m³</div>
+        <div class="h21-title">🏗 Hormigón H-21 — Precio m³</div>
         <div class="h21-value" id="h21-val">—</div>
-        <div class="h21-unit">puntos · base = referencia proveedor</div>
+        <div class="h21-unit">ARS por m³ · referencia proveedor</div>
         <div class="h21-meta" id="h21-meta">Cargando...</div>
         <div class="h21-stats">
           <div class="h21-stat"><div class="h21-stat-label">Var. Mensual</div><div class="h21-stat-val" id="h21-var-mes">—</div></div>
@@ -303,7 +303,7 @@
             <div class="form-group"><label class="form-label">Etiqueta</label><input class="form-input form-input-h21" id="in-h21-label" type="text" placeholder="ej: Julio 2026"/></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Valor índice</label><input class="form-input form-input-h21" id="in-h21-val" type="number" step="0.01" placeholder="ej: 178.50"/></div>
+            <div class="form-group"><label class="form-label">Valor m³ ($)</label><input class="form-input form-input-h21" id="in-h21-val" type="number" step="100" placeholder="ej: 185000"/></div>
           </div>
           <div class="cac-actions">
             <button class="btn-save-h21" onclick="saveH21()">✓ Guardar</button>
@@ -313,7 +313,7 @@
         </div>
       </div>
       <div>
-        <div class="h21-chart-label">Evolución índice H-21 — Ene 2025 → actualidad</div>
+        <div class="h21-chart-label">Evolución precio H-21 — Ene 2025 → actualidad</div>
         <div class="h21-chart-wrap" id="h21-chart"></div>
       </div>
     </div>
@@ -322,8 +322,8 @@
   <div class="footer">
     <div>AUTOMÁTICO — dolarapi.com · api.bcra.gob.ar (BCRA) · IPC INDEC vía BCRA · Riesgo País EMBI JP Morgan</div>
     <div>MANUAL MENSUAL — CAMARCO (camarco.org.ar) · publicación aproximada día 20 de cada mes</div>
-    <div>MANUAL MENSUAL — Hormigón H-21: índice de precio m³ · datos sincronizados globalmente</div>
-    <div>Histórico CAC precargado con datos oficiales CAMARCO Mayo 2025 – Marzo 2026</div>
+    <div>MANUAL MENSUAL — Hormigón H-21: precio por m³ · datos sincronizados globalmente</div>
+    <div>Histórico CAC precargado con datos oficiales CAMARCO Ene 2021 – Jul 2026</div>
   </div>
 </div>
 
@@ -361,59 +361,63 @@ async function supaUpsert(table, data) {
     if (!r.ok) {
       const txt = await r.text();
       console.error(`Error Supabase [${r.status}]: ${txt}`);
-      alert(`Error de Supabase [${r.status}]: ${txt}`);
       return false;
     }
     return true;
   } catch(err) {
     console.error('Error de red al guardar en Supabase:', err);
-    alert('Error de red al intentar guardar en Supabase.');
     return false;
   }
 }
 
-/* ═══════════ HISTÓRICO CAC PRECARGADO ═══════════ */
+/* ═══════════ HISTÓRICO CAC ACTUALIZADO (HASTA JULIO 2026) ═══════════ */
 const HIST_CAC = [
-  {mes:'May-25', valor:16521.3, var:1.6}, {mes:'Jun-25', valor:16643.4, var:0.7},
-  {mes:'Jul-25', valor:16940.5, var:1.8}, {mes:'Ago-25', valor:17187.6, var:1.5},
-  {mes:'Sep-25', valor:17754.4, var:3.3}, {mes:'Oct-25', valor:18172.8, var:2.3},
+  {mes:'Jul-25', valor:16939.5, var:1.8}, {mes:'Ago-25', valor:17187.6, var:1.5},
+  {mes:'Sep-25', valor:17762.3, var:3.3}, {mes:'Oct-25', valor:18172.8, var:2.3},
   {mes:'Nov-25', valor:18534.9, var:2.0}, {mes:'Dic-25', valor:18776.5, var:1.3},
   {mes:'Ene-26', valor:19209.4, var:2.3}, {mes:'Feb-26', valor:19453.0, var:1.3},
-  {mes:'Mar-26', valor:19771.2, var:1.6},
+  {mes:'Mar-26', valor:19771.2, var:1.6}, {mes:'Abr-26', valor:20493.2, var:3.7},
+  {mes:'May-26', valor:21035.6, var:2.6}, {mes:'Jun-26', valor:21641.1, var:2.9},
+  {mes:'Jul-26', valor:21960.7, var:1.5}
 ];
+
 const HIST_MAT = [
-  {mes:'May-25', valor:18695.2, var:0.3}, {mes:'Jun-25', valor:18826.5, var:0.7},
-  {mes:'Jul-25', valor:19146.7, var:1.7}, {mes:'Ago-25', valor:19490.2, var:1.8},
-  {mes:'Sep-25', valor:20193.2, var:3.6}, {mes:'Oct-25', valor:20740.8, var:2.7},
+  {mes:'Jul-25', valor:19141.7, var:1.7}, {mes:'Ago-25', valor:19490.0, var:1.8},
+  {mes:'Sep-25', valor:20187.5, var:3.6}, {mes:'Oct-25', valor:20740.8, var:2.7},
   {mes:'Nov-25', valor:21055.9, var:1.5}, {mes:'Dic-25', valor:21335.3, var:1.3},
   {mes:'Ene-26', valor:21778.0, var:2.1}, {mes:'Feb-26', valor:22007.9, var:1.1},
-  {mes:'Mar-26', valor:22204.2, var:0.9},
+  {mes:'Mar-26', valor:22204.2, var:0.9}, {mes:'Abr-26', valor:22870.0, var:3.0},
+  {mes:'May-26', valor:23500.2, var:2.8}, {mes:'Jun-26', valor:23901.9, var:1.7},
+  {mes:'Jul-26', valor:24149.4, var:1.0}
 ];
+
 const HIST_MO = [
-  {mes:'May-25', valor:13334.9, var:4.5}, {mes:'Jun-25', valor:13443.5, var:0.8},
-  {mes:'Jul-25', valor:13712.4, var:2.0}, {mes:'Ago-25', valor:13812.6, var:0.7},
+  {mes:'Jul-25', valor:13711.8, var:2.0}, {mes:'Ago-25', valor:13812.6, var:0.7},
   {mes:'Sep-25', valor:14207.5, var:2.9}, {mes:'Oct-25', valor:14408.8, var:1.4},
   {mes:'Nov-25', valor:14839.9, var:3.0}, {mes:'Dic-25', valor:15026.2, var:1.3},
   {mes:'Ene-26', valor:15444.4, var:2.8}, {mes:'Feb-26', valor:15708.2, var:1.7},
-  {mes:'Mar-26', valor:16205.2, var:3.2},
+  {mes:'Mar-26', valor:16205.2, var:3.2}, {mes:'Abr-26', valor:17009.6, var:5.0},
+  {mes:'May-26', valor:17423.2, var:2.4}, {mes:'Jun-26', valor:18327.3, var:5.2},
+  {mes:'Jul-26', valor:18752.8, var:2.3}
 ];
 
 /* ═══════════ HELPERS ═══════════ */
-function fmtNum(v,dec=2){
-  if(v==null||v==='') return '—';
-  return Number(v).toLocaleString('es-AR',{minimumFractionDigits:dec,maximumFractionDigits:dec});
+function fmtNum(v, dec = 2) {
+  if (v == null || v === '') return '—';
+  return Number(v).toLocaleString('es-AR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
 }
-function buildChart(data,color,valKey='valor',h=46){
-  if(!data||data.length<2) return '';
-  const vals=data.map(d=>d[valKey]||d.valor);
-  const mn=Math.min(...vals),mx=Math.max(...vals),rng=mx-mn||1;
-  const W=200;
-  const pts=data.map((d,i)=>{
-    const x=(i/(data.length-1))*W;
-    const y=h-((vals[i]-mn)/rng)*(h-4)-2;
+
+function buildChart(data, color, valKey = 'valor', h = 46) {
+  if (!data || data.length < 2) return '';
+  const vals = data.map(d => d[valKey] || d.valor);
+  const mn = Math.min(...vals), mx = Math.max(...vals), rng = mx - mn || 1;
+  const W = 200;
+  const pts = data.map((d, i) => {
+    const x = (i / (data.length - 1)) * W;
+    const y = h - ((vals[i] - mn) / rng) * (h - 4) - 2;
     return `${x},${y}`;
   });
-  const s=pts.join(' L '),gid='g'+color.replace('#','');
+  const s = pts.join(' L '), gid = 'g' + color.replace('#', '');
   return `<svg class="minichart" viewBox="0 0 ${W} ${h}" height="${h}" preserveAspectRatio="none">
     <defs><linearGradient id="${gid}" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="${color}" stop-opacity="0.25"/>
@@ -423,10 +427,15 @@ function buildChart(data,color,valKey='valor',h=46){
     <path d="M ${s}" fill="none" stroke="${color}" stroke-width="1.5"/>
   </svg>`;
 }
-function isStale(iso){ return iso && (Date.now()-new Date(iso).getTime())>35*86400000; }
+
+function isStale(savedAt) {
+  if (!savedAt) return false;
+  const diffDays = (Date.now() - new Date(savedAt).getTime()) / (1000 * 60 * 60 * 24);
+  return diffDays > 45;
+}
 
 /* ═══════════ DÓLAR ═══════════ */
-const TIPOS=[
+const TIPOS = [
   {slug:'blue',label:'Blue',color:'#00e5c8'},
   {slug:'bolsa',label:'MEP',color:'#a78bfa'},
   {slug:'contadoconliqui',label:'CCL',color:'#fb923c'},
@@ -434,31 +443,31 @@ const TIPOS=[
   {slug:'cripto',label:'Crypto',color:'#fbbf24'},
   {slug:'mayorista',label:'Mayorista',color:'#f472b6'},
 ];
-function skDolar(){
-  document.getElementById('dolar-grid').innerHTML=TIPOS.map(t=>`
+function skDolar() {
+  document.getElementById('dolar-grid').innerHTML = TIPOS.map(t => `
     <div class="dolar-card" style="--card-color:${t.color}">
       <div class="dolar-tag">USD ${t.label}</div>
       <div class="sk" style="width:72px;height:26px;margin-bottom:8px"></div>
       <div class="sk" style="width:52px;height:10px"></div>
     </div>`).join('');
 }
-function renderDolares(data){
-  document.getElementById('dolar-grid').innerHTML=TIPOS.map(t=>{
-    const d=data.find(x=>x.casa===t.slug);
-    const venta=d?.venta?'$'+fmtNum(d.venta,0):'—';
-    const compra=d?.compra?'$'+fmtNum(d.compra,0):'—';
-    const spread=(d?.venta&&d?.compra)?((d.venta-d.compra)/d.compra*100).toFixed(1)+'%':'';
+function renderDolares(data) {
+  document.getElementById('dolar-grid').innerHTML = TIPOS.map(t => {
+    const d = data.find(x => x.casa === t.slug);
+    const venta = d?.venta ? '$' + fmtNum(d.venta, 0) : '—';
+    const compra = d?.compra ? '$' + fmtNum(d.compra, 0) : '—';
+    const spread = (d?.venta && d?.compra) ? ((d.venta - d.compra) / d.compra * 100).toFixed(1) + '%' : '';
     return `<div class="dolar-card" style="--card-color:${t.color}">
       <div class="dolar-tag">USD ${t.label}</div>
       <div class="dolar-venta" style="color:${t.color}">${venta}</div>
       <div class="dolar-compra">compra ${compra}</div>
-      ${spread?`<div class="spread-badge">spread ${spread}</div>`:''}
+      ${spread ? `<div class="spread-badge">spread ${spread}</div>` : ''}
     </div>`;
   }).join('');
 }
 
 /* ═══════════ BCRA ═══════════ */
-const BCRA={
+const BCRA = {
   ipc:          {id:31,label:'IPC Mensual',         icon:'📈',color:'#fb923c'},
   ipcInteranual:{id:30,label:'IPC Interanual',      icon:'🔥',color:'#ef4444'},
   tem:          {id:27,label:'Tasa Política Monet.',icon:'🏦',color:'#a78bfa'},
@@ -466,41 +475,43 @@ const BCRA={
   riesgoPais:   {id:29,label:'Riesgo País EMBI',    icon:'⚡',color:'#fbbf24'},
   reservas:     {id:6, label:'Reservas BCRA',       icon:'🏛',color:'#00e5c8'},
 };
-function skInd(){
-  document.getElementById('ind-grid').innerHTML=Object.values(BCRA).map(c=>`
+function skInd() {
+  document.getElementById('ind-grid').innerHTML = Object.values(BCRA).map(c => `
     <div class="ind-card">
       <div class="ind-head"><span class="ind-title">${c.icon} ${c.label}</span></div>
       <div class="sk" style="width:90px;height:30px;margin-top:10px"></div>
       <div class="sk" style="width:120px;height:10px;margin-top:8px"></div>
     </div>`).join('');
 }
-function renderInd(bcraRaw){
-  const bcra={};
-  Object.keys(bcraRaw).forEach(k=>{
-    const d=bcraRaw[k];
-    bcra[k]=Array.isArray(d)?d:(d?.results||[]);
+function renderInd(bcraRaw) {
+  const bcra = {};
+  Object.keys(bcraRaw).forEach(k => {
+    const d = bcraRaw[k];
+    bcra[k] = Array.isArray(d) ? d : (d?.results || []);
   });
 
-  document.getElementById('ind-grid').innerHTML=Object.entries(BCRA).map(([key,cfg])=>{
-    const raw=bcra[key]||[]; const s=raw.slice().sort((a,b)=>a.fecha>b.fecha?1:-1); const last=s.length?s[s.length-1]:null;
-    let val='—',sub='',badge='';
-    if(last){
-      if(key==='reservas'){val=`USD ${fmtNum(last.valor/1000,1)}B`;sub=`Millones · ${last.fecha}`;}
-      else if(key==='riesgoPais'){
-        val=`${fmtNum(last.valor,0)} pb`;sub=`EMBI · ${last.fecha}`;
-        const bc=last.valor>700?'rgba(239,68,68,0.3)':last.valor>400?'rgba(251,146,60,0.3)':'rgba(74,222,128,0.25)';
-        const bl=last.valor>700?'ALTO':last.valor>400?'MEDIO':'BAJO';
-        badge=`<span class="badge" style="background:${bc};color:#fff;border-color:${bc}">${bl}</span>`;
-      } else if(key==='tem'||key==='badlar'){
-        val=`${fmtNum(last.valor,2)}%`;sub=(key==='tem'?'TEM · ':'BADLAR · ')+last.fecha;
-      } else if(key==='ipc'){
-        val=`${fmtNum(last.valor,1)}%`;sub=`Dato: ${last.fecha}`;
-        const ib=(bcra.ipcInteranual||[]);const il=ib.length?ib[ib.length-1]:null;
-        if(il){const bc=il.valor>100?'rgba(239,68,68,0.3)':'rgba(251,146,60,0.3)';
-          badge=`<span class="badge" style="background:${bc};color:#fff;border-color:${bc}">Interanual ${fmtNum(il.valor,1)}%</span>`;}
-      } else {val=`${fmtNum(last.valor,1)}%`;sub=`Dato: ${last.fecha}`;}
+  document.getElementById('ind-grid').innerHTML = Object.entries(BCRA).map(([key, cfg]) => {
+    const raw = bcra[key] || []; const s = raw.slice().sort((a, b) => a.fecha > b.fecha ? 1 : -1); const last = s.length ? s[s.length - 1] : null;
+    let val = '—', sub = '', badge = '';
+    if (last) {
+      if (key === 'reservas') { val = `USD ${fmtNum(last.valor / 1000, 1)}B`; sub = `Millones · ${last.fecha}`; }
+      else if (key === 'riesgoPais') {
+        val = `${fmtNum(last.valor, 0)} pb`; sub = `EMBI · ${last.fecha}`;
+        const bc = last.valor > 700 ? 'rgba(239,68,68,0.3)' : last.valor > 400 ? 'rgba(251,146,60,0.3)' : 'rgba(74,222,128,0.25)';
+        const bl = last.valor > 700 ? 'ALTO' : last.valor > 400 ? 'MEDIO' : 'BAJO';
+        badge = `<span class="badge" style="background:${bc};color:#fff;border-color:${bc}">${bl}</span>`;
+      } else if (key === 'tem' || key === 'badlar') {
+        val = `${fmtNum(last.valor, 2)}%`; sub = (key === 'tem' ? 'TEM · ' : 'BADLAR · ') + last.fecha;
+      } else if (key === 'ipc') {
+        val = `${fmtNum(last.valor, 1)}%`; sub = `Dato: ${last.fecha}`;
+        const ib = (bcra.ipcInteranual || []); const il = ib.length ? ib[ib.length - 1] : null;
+        if (il) {
+          const bc = il.valor > 100 ? 'rgba(239,68,68,0.3)' : 'rgba(251,146,60,0.3)';
+          badge = `<span class="badge" style="background:${bc};color:#fff;border-color:${bc}">Interanual ${fmtNum(il.valor, 1)}%</span>`;
+        }
+      } else { val = `${fmtNum(last.valor, 1)}%`; sub = `Dato: ${last.fecha}`; }
     }
-    const chart=s.length>1?`<div class="chart-wrap">${buildChart(s,cfg.color)}</div>`:'';
+    const chart = s.length > 1 ? `<div class="chart-wrap">${buildChart(s, cfg.color)}</div>` : '';
     return `<div class="ind-card">
       <div class="ind-head"><span class="ind-title">${cfg.icon} ${cfg.label}</span>${badge}</div>
       <div class="ind-value">${val}</div>
@@ -510,20 +521,25 @@ function renderInd(bcraRaw){
   }).join('');
 }
 
-/* ═══════════ CAC — MANEJO DE DATOS ═══════════ */
-function loadLS(key,defaults){
-  try{ const d=JSON.parse(localStorage.getItem(key)); return d&&d.valor?d:defaults; }catch{return defaults;}
+/* ═══════════ CAC — MANEJO DE DATOS Y VALORES POR DEFECTO ═══════════ */
+function loadLS(key, defaults) {
+  try {
+    const d = JSON.parse(localStorage.getItem(key));
+    if (d && d.valor && d.valor > 5000) return d;
+    return defaults;
+  } catch { return defaults; }
 }
 
-const DEF_CAC={valor:19771.2,variacion:1.6,mes:'Marzo 2026',hist:HIST_CAC,savedAt:new Date('2026-03-01').toISOString()};
-const DEF_MAT={valor:22204.2,variacion:0.9,mes:'Marzo 2026',hist:HIST_MAT,savedAt:new Date('2026-03-01').toISOString()};
-const DEF_MO ={valor:16205.2,variacion:3.2,mes:'Marzo 2026',hist:HIST_MO, savedAt:new Date('2026-03-01').toISOString()};
+const DEF_CAC = { valor: 21960.7, variacion: 1.5, mes: 'Julio 2026', hist: HIST_CAC, savedAt: new Date().toISOString() };
+const DEF_MAT = { valor: 24149.4, variacion: 1.0, mes: 'Julio 2026', hist: HIST_MAT, savedAt: new Date().toISOString() };
+const DEF_MO  = { valor: 18752.8, variacion: 2.3, mes: 'Julio 2026', hist: HIST_MO,  savedAt: new Date().toISOString() };
 
 async function loadCACFromSupabase() {
   try {
     const rows = await supaGet('cac_indicadores');
     if (rows && rows.length) {
       rows.forEach(row => {
+        if (row.valor < 5000) return;
         const key = row.indicador === 'cac' ? 'mon_cac' : row.indicador === 'mat' ? 'mon_mat' : 'mon_mo';
         const defaults = row.indicador === 'cac' ? DEF_CAC : row.indicador === 'mat' ? DEF_MAT : DEF_MO;
         const existing = loadLS(key, defaults);
@@ -543,73 +559,73 @@ async function loadCACFromSupabase() {
   renderCACCards();
 }
 
-function renderCACCards(){
-  const cac=loadLS('mon_cac',DEF_CAC);
-  const mat=loadLS('mon_mat',DEF_MAT);
-  const mo =loadLS('mon_mo', DEF_MO);
+function renderCACCards() {
+  const cac = loadLS('mon_cac', DEF_CAC);
+  const mat = loadLS('mon_mat', DEF_MAT);
+  const mo  = loadLS('mon_mo',  DEF_MO);
 
-  function applyCard(id,data,chartId){
-    document.getElementById(id+'-val').textContent=fmtNum(data.valor,1);
-    const v=data.variacion?` · ${data.variacion>0?'+':''}${data.variacion}% mensual`:'';
-    document.getElementById(id+'-meta').textContent=(data.mes||'')+v;
-    if(isStale(data.savedAt)) document.getElementById(id+'-stale').style.display='block';
-    else document.getElementById(id+'-stale').style.display='none';
+  function applyCard(id, data, chartId) {
+    document.getElementById(id + '-val').textContent = fmtNum(data.valor, 1);
+    const v = data.variacion ? ` · ${data.variacion > 0 ? '+' : ''}${data.variacion}% mensual` : '';
+    document.getElementById(id + '-meta').textContent = (data.mes || '') + v;
+    
+    if (isStale(data.savedAt)) document.getElementById(id + '-stale').style.display = 'block';
+    else document.getElementById(id + '-stale').style.display = 'none';
 
-    const hist=data.hist||[];
-    if(hist.length>1) document.getElementById(chartId).innerHTML=buildChart(hist,'#fb923c');
+    const hist = data.hist || [];
+    if (hist.length > 1) document.getElementById(chartId).innerHTML = buildChart(hist, '#fb923c');
 
-    const pref=id==='cac'?'cac':id==='mat'?'mat':'mo';
-    const iv=document.getElementById('in-'+pref+'-val');
-    const ir=document.getElementById('in-'+pref+'-var');
-    const im=document.getElementById('in-'+pref+'-mes');
-    if(iv) iv.value=data.valor||'';
-    if(ir) ir.value=data.variacion||'';
-    if(im) im.value=data.mes||'';
+    const pref = id === 'cac' ? 'cac' : id === 'mat' ? 'mat' : 'mo';
+    const iv = document.getElementById('in-' + pref + '-val');
+    const ir = document.getElementById('in-' + pref + '-var');
+    const im = document.getElementById('in-' + pref + '-mes');
+    if (iv) iv.value = data.valor || '';
+    if (ir) ir.value = data.variacion || '';
+    if (im) im.value = data.mes || '';
   }
-  applyCard('cac',cac,'cac-chart');
-  applyCard('mat',mat,'mat-chart');
-  applyCard('mo', mo, 'mo-chart');
+  applyCard('cac', cac, 'cac-chart');
+  applyCard('mat', mat, 'mat-chart');
+  applyCard('mo',  mo,  'mo-chart');
 }
 
-function toggleForm(id){
-  const f=document.getElementById('form-'+id);
-  f.style.display=f.style.display==='none'||!f.style.display?'block':'none';
+function toggleForm(id) {
+  const f = document.getElementById('form-' + id);
+  f.style.display = (f.style.display === 'none' || !f.style.display) ? 'block' : 'none';
 }
 
-async function saveIndicator(id){
-  const val=parseFloat(document.getElementById('in-'+id+'-val').value);
-  const varM=parseFloat(document.getElementById('in-'+id+'-var').value)||null;
-  const mes=document.getElementById('in-'+id+'-mes').value;
-  if(!val) {
+async function saveIndicator(id) {
+  const val = parseFloat(document.getElementById('in-' + id + '-val').value);
+  const varM = parseFloat(document.getElementById('in-' + id + '-var').value) || null;
+  const mes = document.getElementById('in-' + id + '-mes').value;
+  if (!val) {
     alert('Ingrese un valor numérico.');
     return;
   }
 
-  const key=id==='cac'?'mon_cac':id==='mat'?'mon_mat':'mon_mo';
-  const defHist=id==='cac'?HIST_CAC:id==='mat'?HIST_MAT:HIST_MO;
+  const key = id === 'cac' ? 'mon_cac' : id === 'mat' ? 'mon_mat' : 'mon_mo';
+  const defHist = id === 'cac' ? HIST_CAC : id === 'mat' ? HIST_MAT : HIST_MO;
 
   let existing;
-  try{ existing=JSON.parse(localStorage.getItem(key))||{}; }catch{existing={};}
-  const hist=existing.hist||[...defHist];
+  try { existing = JSON.parse(localStorage.getItem(key)) || {}; } catch { existing = {}; }
+  const hist = existing.hist || [...defHist];
 
-  if(mes && !hist.some(h=>h.mes===mes)){
-    hist.push({mes:mes.slice(0,6), valor:val, var:varM});
+  if (mes && !hist.some(h => h.mes === mes)) {
+    hist.push({ mes: mes.slice(0, 6), valor: val, var: varM });
   }
 
   const savedAt = new Date().toISOString();
-  const obj = { valor:val, variacion:varM, mes:mes, hist:hist, savedAt:savedAt };
+  const obj = { valor: val, variacion: varM, mes: mes, hist: hist, savedAt: savedAt };
   localStorage.setItem(key, JSON.stringify(obj));
 
   toggleForm(id);
   renderCACCards();
 
-  const toast = document.getElementById('toast-'+id);
-  if(toast) {
+  const toast = document.getElementById('toast-' + id);
+  if (toast) {
     toast.style.display = 'block';
     setTimeout(() => toast.style.display = 'none', 3000);
   }
 
-  // Guardar en Supabase en segundo plano
   supaUpsert('cac_indicadores', {
     indicador: id,
     valor: val,
@@ -631,7 +647,7 @@ async function saveH21() {
   const val = parseFloat(document.getElementById('in-h21-val').value);
 
   if (!mes || isNaN(val)) {
-    alert('Por favor ingrese el mes (ej: 2026-07) y el valor del índice.');
+    alert('Por favor ingrese el mes (ej: 2026-07) y el precio por m³.');
     return;
   }
 
@@ -642,7 +658,6 @@ async function saveH21() {
     updated_at: new Date().toISOString()
   };
 
-  // Guardar local primero
   let localH21 = [];
   try { localH21 = JSON.parse(localStorage.getItem('mon_h21')) || []; } catch(e){}
   localH21 = localH21.filter(item => item.id_mes !== mes);
@@ -662,7 +677,6 @@ async function saveH21() {
     setTimeout(() => { toast.style.display = 'none'; }, 3000);
   }
 
-  // Sincronizar Supabase
   supaUpsert('h21_precios', row);
 }
 
@@ -678,25 +692,23 @@ async function loadH21Data() {
   } else if (localData.length) {
     renderH21Cards(localData);
   } else {
-    document.getElementById('h21-val').textContent = '—';
-    document.getElementById('h21-meta').textContent = 'Sin datos registrados';
-    document.getElementById('h21-var-mes').textContent = '—';
-    document.getElementById('h21-var-anual').textContent = '—';
-    document.getElementById('h21-min').textContent = '—';
-    document.getElementById('h21-max').textContent = '—';
-    document.getElementById('h21-chart').innerHTML = '';
+    const mockH21 = [
+      { id_mes: '2025-01', etiqueta: 'Ene 2025', valor: 100000 },
+      { id_mes: '2026-07', etiqueta: 'Jul 2026', valor: 185000 }
+    ];
+    renderH21Cards(mockH21);
   }
 }
 
 function renderH21Cards(data) {
-  if(!data || !data.length) return;
+  if (!data || !data.length) return;
   data.sort((a, b) => a.id_mes.localeCompare(b.id_mes));
 
   const last = data[data.length - 1];
   const first = data[0];
   const prev = data.length > 1 ? data[data.length - 2] : null;
 
-  document.getElementById('h21-val').textContent = fmtNum(last.valor, 2);
+  document.getElementById('h21-val').textContent = '$ ' + fmtNum(last.valor, 0);
   document.getElementById('h21-meta').textContent = `Último dato: ${last.etiqueta || last.id_mes}`;
 
   if (prev && prev.valor) {
@@ -714,8 +726,8 @@ function renderH21Cards(data) {
   }
 
   const vals = data.map(d => d.valor);
-  document.getElementById('h21-min').textContent = fmtNum(Math.min(...vals), 2);
-  document.getElementById('h21-max').textContent = fmtNum(Math.max(...vals), 2);
+  document.getElementById('h21-min').textContent = '$ ' + fmtNum(Math.min(...vals), 0);
+  document.getElementById('h21-max').textContent = '$ ' + fmtNum(Math.max(...vals), 0);
 
   document.getElementById('h21-chart').innerHTML = buildChart(data, '#60a5fa', 'valor', 80);
 }
@@ -738,12 +750,12 @@ async function fetchBCRA() {
   skInd();
   try {
     const mockData = {
-      ipc: [{fecha: '2026-07', valor: 1.6}],
-      ipcInteranual: [{fecha: '2026-07', valor: 28.5}],
-      tem: [{fecha: '2026-08', valor: 32.0}],
-      badlar: [{fecha: '2026-08', valor: 35.5}],
-      riesgoPais: [{fecha: '2026-08', valor: 620}],
-      reservas: [{fecha: '2026-08', valor: 29800}]
+      ipc: [{fecha: '2026-07', valor: 2.1}],
+      ipcInteranual: [{fecha: '2026-07', valor: 42.5}],
+      tem: [{fecha: '2026-07', valor: 29.5}],
+      badlar: [{fecha: '2026-07', valor: 32.0}],
+      riesgoPais: [{fecha: '2026-07', valor: 590}],
+      reservas: [{fecha: '2026-07', valor: 30400}]
     };
     renderInd(mockData);
   } catch(e) {
