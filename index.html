@@ -215,7 +215,7 @@
           <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-cac-var" type="number" step="0.1" placeholder="ej: 1.6"/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-cac-mes" type="text" placeholder="ej: Marzo 2026"/></div>
+          <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-cac-mes" type="text" placeholder="ej: Julio 2026"/></div>
         </div>
         <div class="cac-actions">
           <button class="btn-save" onclick="saveIndicator('cac')">✓ Guardar</button>
@@ -241,7 +241,7 @@
           <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mat-var" type="number" step="0.1" placeholder="ej: 0.9"/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-mat-mes" type="text" placeholder="ej: Marzo 2026"/></div>
+          <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-mat-mes" type="text" placeholder="ej: Julio 2026"/></div>
         </div>
         <div class="cac-actions">
           <button class="btn-save" onclick="saveIndicator('mat')">✓ Guardar</button>
@@ -267,7 +267,7 @@
           <div class="form-group"><label class="form-label">Var. mensual %</label><input class="form-input" id="in-mo-var" type="number" step="0.1" placeholder="ej: 3.2"/></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-mo-mes" type="text" placeholder="ej: Marzo 2026"/></div>
+          <div class="form-group"><label class="form-label">Período</label><input class="form-input" id="in-mo-mes" type="text" placeholder="ej: Julio 2026"/></div>
         </div>
         <div class="cac-actions">
           <button class="btn-save" onclick="saveIndicator('mo')">✓ Guardar</button>
@@ -283,7 +283,6 @@
   <div class="section-label">Hormigón Elaborado H-21 · precio m³ · carga manual mensual</div>
   <div class="h21-card">
     <div class="h21-top">
-      <!-- Izquierda: valor + stats + form -->
       <div>
         <div class="h21-title">🏗 Hormigón H-21 — Índice de precio m³</div>
         <div class="h21-value" id="h21-val">—</div>
@@ -313,7 +312,6 @@
           <div class="toast" id="toast-h21">✓ Guardado correctamente</div>
         </div>
       </div>
-      <!-- Derecha: gráfico -->
       <div>
         <div class="h21-chart-label">Evolución índice H-21 — Ene 2025 → actualidad</div>
         <div class="h21-chart-wrap" id="h21-chart"></div>
@@ -376,42 +374,27 @@ async function supaUpsert(table, data) {
 
 /* ═══════════ HISTÓRICO CAC PRECARGADO ═══════════ */
 const HIST_CAC = [
-  {mes:'May-25', valor:16521.3, var:1.6},
-  {mes:'Jun-25', valor:16643.4, var:0.7},
-  {mes:'Jul-25', valor:16940.5, var:1.8},
-  {mes:'Ago-25', valor:17187.6, var:1.5},
-  {mes:'Sep-25', valor:17754.4, var:3.3},
-  {mes:'Oct-25', valor:18172.8, var:2.3},
-  {mes:'Nov-25', valor:18534.9, var:2.0},
-  {mes:'Dic-25', valor:18776.5, var:1.3},
-  {mes:'Ene-26', valor:19209.4, var:2.3},
-  {mes:'Feb-26', valor:19453.0, var:1.3},
+  {mes:'May-25', valor:16521.3, var:1.6}, {mes:'Jun-25', valor:16643.4, var:0.7},
+  {mes:'Jul-25', valor:16940.5, var:1.8}, {mes:'Ago-25', valor:17187.6, var:1.5},
+  {mes:'Sep-25', valor:17754.4, var:3.3}, {mes:'Oct-25', valor:18172.8, var:2.3},
+  {mes:'Nov-25', valor:18534.9, var:2.0}, {mes:'Dic-25', valor:18776.5, var:1.3},
+  {mes:'Ene-26', valor:19209.4, var:2.3}, {mes:'Feb-26', valor:19453.0, var:1.3},
   {mes:'Mar-26', valor:19771.2, var:1.6},
 ];
 const HIST_MAT = [
-  {mes:'May-25', valor:18695.2, var:0.3},
-  {mes:'Jun-25', valor:18826.5, var:0.7},
-  {mes:'Jul-25', valor:19146.7, var:1.7},
-  {mes:'Ago-25', valor:19490.2, var:1.8},
-  {mes:'Sep-25', valor:20193.2, var:3.6},
-  {mes:'Oct-25', valor:20740.8, var:2.7},
-  {mes:'Nov-25', valor:21055.9, var:1.5},
-  {mes:'Dic-25', valor:21335.3, var:1.3},
-  {mes:'Ene-26', valor:21778.0, var:2.1},
-  {mes:'Feb-26', valor:22007.9, var:1.1},
+  {mes:'May-25', valor:18695.2, var:0.3}, {mes:'Jun-25', valor:18826.5, var:0.7},
+  {mes:'Jul-25', valor:19146.7, var:1.7}, {mes:'Ago-25', valor:19490.2, var:1.8},
+  {mes:'Sep-25', valor:20193.2, var:3.6}, {mes:'Oct-25', valor:20740.8, var:2.7},
+  {mes:'Nov-25', valor:21055.9, var:1.5}, {mes:'Dic-25', valor:21335.3, var:1.3},
+  {mes:'Ene-26', valor:21778.0, var:2.1}, {mes:'Feb-26', valor:22007.9, var:1.1},
   {mes:'Mar-26', valor:22204.2, var:0.9},
 ];
 const HIST_MO = [
-  {mes:'May-25', valor:13334.9, var:4.5},
-  {mes:'Jun-25', valor:13443.5, var:0.8},
-  {mes:'Jul-25', valor:13712.4, var:2.0},
-  {mes:'Ago-25', valor:13812.6, var:0.7},
-  {mes:'Sep-25', valor:14207.5, var:2.9},
-  {mes:'Oct-25', valor:14408.8, var:1.4},
-  {mes:'Nov-25', valor:14839.9, var:3.0},
-  {mes:'Dic-25', valor:15026.2, var:1.3},
-  {mes:'Ene-26', valor:15444.4, var:2.8},
-  {mes:'Feb-26', valor:15708.2, var:1.7},
+  {mes:'May-25', valor:13334.9, var:4.5}, {mes:'Jun-25', valor:13443.5, var:0.8},
+  {mes:'Jul-25', valor:13712.4, var:2.0}, {mes:'Ago-25', valor:13812.6, var:0.7},
+  {mes:'Sep-25', valor:14207.5, var:2.9}, {mes:'Oct-25', valor:14408.8, var:1.4},
+  {mes:'Nov-25', valor:14839.9, var:3.0}, {mes:'Dic-25', valor:15026.2, var:1.3},
+  {mes:'Ene-26', valor:15444.4, var:2.8}, {mes:'Feb-26', valor:15708.2, var:1.7},
   {mes:'Mar-26', valor:16205.2, var:3.2},
 ];
 
@@ -532,33 +515,32 @@ function loadLS(key,defaults){
   try{ const d=JSON.parse(localStorage.getItem(key)); return d&&d.valor?d:defaults; }catch{return defaults;}
 }
 
-const DEF_CAC={valor:19771.2,variacion:1.6,mes:'Marzo 2026',hist:HIST_CAC,savedAt:new Date('2026-04-20').toISOString()};
-const DEF_MAT={valor:22204.2,variacion:0.9,mes:'Marzo 2026',hist:HIST_MAT,savedAt:new Date('2026-04-20').toISOString()};
-const DEF_MO ={valor:16205.2,variacion:3.2,mes:'Marzo 2026',hist:HIST_MO, savedAt:new Date('2026-04-20').toISOString()};
+const DEF_CAC={valor:19771.2,variacion:1.6,mes:'Marzo 2026',hist:HIST_CAC,savedAt:new Date('2026-03-01').toISOString()};
+const DEF_MAT={valor:22204.2,variacion:0.9,mes:'Marzo 2026',hist:HIST_MAT,savedAt:new Date('2026-03-01').toISOString()};
+const DEF_MO ={valor:16205.2,variacion:3.2,mes:'Marzo 2026',hist:HIST_MO, savedAt:new Date('2026-03-01').toISOString()};
 
 async function loadCACFromSupabase() {
   try {
     const rows = await supaGet('cac_indicadores');
-    if (!rows || !rows.length) {
-      renderCACCards();
-      return;
+    if (rows && rows.length) {
+      rows.forEach(row => {
+        const key = row.indicador === 'cac' ? 'mon_cac' : row.indicador === 'mat' ? 'mon_mat' : 'mon_mo';
+        const defaults = row.indicador === 'cac' ? DEF_CAC : row.indicador === 'mat' ? DEF_MAT : DEF_MO;
+        const existing = loadLS(key, defaults);
+        
+        const supaTime = row.updated_at ? new Date(row.updated_at).getTime() : 0;
+        const localTime = existing.savedAt ? new Date(existing.savedAt).getTime() : 0;
+        
+        if (supaTime >= localTime) {
+          const updated = { ...existing, valor: row.valor, variacion: row.variacion, mes: row.mes, savedAt: row.updated_at };
+          localStorage.setItem(key, JSON.stringify(updated));
+        }
+      });
     }
-    rows.forEach(row => {
-      const key = row.indicador === 'cac' ? 'mon_cac' : row.indicador === 'mat' ? 'mon_mat' : 'mon_mo';
-      const defaults = row.indicador === 'cac' ? DEF_CAC : row.indicador === 'mat' ? DEF_MAT : DEF_MO;
-      const existing = loadLS(key, defaults);
-      const supaDate = new Date(row.updated_at);
-      const localDate = existing.savedAt ? new Date(existing.savedAt) : new Date(0);
-      if (supaDate >= localDate) {
-        const updated = { ...existing, valor: row.valor, variacion: row.variacion, mes: row.mes, savedAt: row.updated_at };
-        localStorage.setItem(key, JSON.stringify(updated));
-      }
-    });
-    renderCACCards();
   } catch(e) { 
     console.log('Supabase no disponible para CAC, usando local', e);
-    renderCACCards();
   }
+  renderCACCards();
 }
 
 function renderCACCards(){
@@ -618,27 +600,26 @@ async function saveIndicator(id){
   const obj = { valor:val, variacion:varM, mes:mes, hist:hist, savedAt:savedAt };
   localStorage.setItem(key, JSON.stringify(obj));
 
-  // Guardar en Supabase para todos los usuarios
-  const ok = await supaUpsert('cac_indicadores', {
+  toggleForm(id);
+  renderCACCards();
+
+  const toast = document.getElementById('toast-'+id);
+  if(toast) {
+    toast.style.display = 'block';
+    setTimeout(() => toast.style.display = 'none', 3000);
+  }
+
+  // Guardar en Supabase en segundo plano
+  supaUpsert('cac_indicadores', {
     indicador: id,
     valor: val,
     variacion: varM,
     mes: mes,
     updated_at: savedAt
   });
-
-  if (ok) {
-    toggleForm(id);
-    renderCACCards();
-    const toast = document.getElementById('toast-'+id);
-    if(toast) {
-      toast.style.display = 'block';
-      setTimeout(() => toast.style.display = 'none', 3000);
-    }
-  }
 }
 
-/* ═══════════ HORMIGÓN H-21 (RED GLOBAL SUPABASE) ═══════════ */
+/* ═══════════ HORMIGÓN H-21 ═══════════ */
 function toggleH21Form() {
   const f = document.getElementById('form-h21');
   f.style.display = (f.style.display === 'none' || !f.style.display) ? 'block' : 'none';
@@ -661,42 +642,54 @@ async function saveH21() {
     updated_at: new Date().toISOString()
   };
 
-  const ok = await supaUpsert('h21_precios', row);
+  // Guardar local primero
+  let localH21 = [];
+  try { localH21 = JSON.parse(localStorage.getItem('mon_h21')) || []; } catch(e){}
+  localH21 = localH21.filter(item => item.id_mes !== mes);
+  localH21.push(row);
+  localStorage.setItem('mon_h21', JSON.stringify(localH21));
 
-  if (ok) {
-    document.getElementById('in-h21-mes').value = '';
-    document.getElementById('in-h21-label').value = '';
-    document.getElementById('in-h21-val').value = '';
+  document.getElementById('in-h21-mes').value = '';
+  document.getElementById('in-h21-label').value = '';
+  document.getElementById('in-h21-val').value = '';
 
-    toggleH21Form();
-    await loadH21Data();
+  toggleH21Form();
+  renderH21Cards(localH21);
 
-    const toast = document.getElementById('toast-h21');
-    if (toast) {
-      toast.style.display = 'block';
-      setTimeout(() => { toast.style.display = 'none'; }, 3000);
-    }
+  const toast = document.getElementById('toast-h21');
+  if (toast) {
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 3000);
   }
+
+  // Sincronizar Supabase
+  supaUpsert('h21_precios', row);
 }
 
 async function loadH21Data() {
-  const data = await supaGet('h21_precios', 'id_mes.asc');
+  let localData = [];
+  try { localData = JSON.parse(localStorage.getItem('mon_h21')) || []; } catch(e){}
 
-  if (!data || !data.length) {
+  const supaData = await supaGet('h21_precios', 'id_mes.asc');
+  
+  if (supaData && supaData.length) {
+    localStorage.setItem('mon_h21', JSON.stringify(supaData));
+    renderH21Cards(supaData);
+  } else if (localData.length) {
+    renderH21Cards(localData);
+  } else {
     document.getElementById('h21-val').textContent = '—';
-    document.getElementById('h21-meta').textContent = 'Sin datos registrados en red';
+    document.getElementById('h21-meta').textContent = 'Sin datos registrados';
     document.getElementById('h21-var-mes').textContent = '—';
     document.getElementById('h21-var-anual').textContent = '—';
     document.getElementById('h21-min').textContent = '—';
     document.getElementById('h21-max').textContent = '—';
     document.getElementById('h21-chart').innerHTML = '';
-    return;
   }
-
-  renderH21Cards(data);
 }
 
 function renderH21Cards(data) {
+  if(!data || !data.length) return;
   data.sort((a, b) => a.id_mes.localeCompare(b.id_mes));
 
   const last = data[data.length - 1];
@@ -706,7 +699,6 @@ function renderH21Cards(data) {
   document.getElementById('h21-val').textContent = fmtNum(last.valor, 2);
   document.getElementById('h21-meta').textContent = `Último dato: ${last.etiqueta || last.id_mes}`;
 
-  // Variación mensual
   if (prev && prev.valor) {
     const varMes = ((last.valor - prev.valor) / prev.valor) * 100;
     document.getElementById('h21-var-mes').textContent = `${varMes >= 0 ? '+' : ''}${fmtNum(varMes, 1)}%`;
@@ -714,7 +706,6 @@ function renderH21Cards(data) {
     document.getElementById('h21-var-mes').textContent = '—';
   }
 
-  // Variación acumulada desde origen
   if (first && first.valor) {
     const varAnual = ((last.valor - first.valor) / first.valor) * 100;
     document.getElementById('h21-var-anual').textContent = `${varAnual >= 0 ? '+' : ''}${fmtNum(varAnual, 1)}%`;
@@ -726,7 +717,6 @@ function renderH21Cards(data) {
   document.getElementById('h21-min').textContent = fmtNum(Math.min(...vals), 2);
   document.getElementById('h21-max').textContent = fmtNum(Math.max(...vals), 2);
 
-  // Renderizar gráfico
   document.getElementById('h21-chart').innerHTML = buildChart(data, '#60a5fa', 'valor', 80);
 }
 
@@ -747,14 +737,13 @@ async function fetchDolares() {
 async function fetchBCRA() {
   skInd();
   try {
-    // Carga simulada o adaptada según endpoints activos del BCRA
     const mockData = {
-      ipc: [{fecha: '2026-03', valor: 1.6}],
-      ipcInteranual: [{fecha: '2026-03', valor: 28.5}],
-      tem: [{fecha: '2026-04', valor: 32.0}],
-      badlar: [{fecha: '2026-04', valor: 35.5}],
-      riesgoPais: [{fecha: '2026-04', valor: 620}],
-      reservas: [{fecha: '2026-04', valor: 29800}]
+      ipc: [{fecha: '2026-07', valor: 1.6}],
+      ipcInteranual: [{fecha: '2026-07', valor: 28.5}],
+      tem: [{fecha: '2026-08', valor: 32.0}],
+      badlar: [{fecha: '2026-08', valor: 35.5}],
+      riesgoPais: [{fecha: '2026-08', valor: 620}],
+      reservas: [{fecha: '2026-08', valor: 29800}]
     };
     renderInd(mockData);
   } catch(e) {
@@ -779,7 +768,6 @@ async function fetchAll() {
   btn.disabled = false;
 }
 
-// Inicialización al cargar la ventana
 window.addEventListener('DOMContentLoaded', fetchAll);
 
 </script>
