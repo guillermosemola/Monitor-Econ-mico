@@ -521,18 +521,25 @@ function renderInd(bcraRaw) {
   }).join('');
 }
 
-/* ═══════════ CAC — MANEJO DE DATOS Y VALORES POR DEFECTO ═══════════ */
-function loadLS(key, defaults) {
-  try {
-    const d = JSON.parse(localStorage.getItem(key));
-    if (d && d.valor && d.valor > 5000) return d;
-    return defaults;
-  } catch { return defaults; }
-}
-
+/* ═══════════ CAC — MANEJO DE DATOS Y MIGRACIÓN AUTOMÁTICA ═══════════ */
 const DEF_CAC = { valor: 21960.7, variacion: 1.5, mes: 'Julio 2026', hist: HIST_CAC, savedAt: new Date().toISOString() };
 const DEF_MAT = { valor: 24149.4, variacion: 1.0, mes: 'Julio 2026', hist: HIST_MAT, savedAt: new Date().toISOString() };
 const DEF_MO  = { valor: 18752.8, variacion: 2.3, mes: 'Julio 2026', hist: HIST_MO,  savedAt: new Date().toISOString() };
+
+function loadLS(key, defaults) {
+  try {
+    const d = JSON.parse(localStorage.getItem(key));
+    // Forzamos actualización si la caché local está desactualizada respecto a Julio 2026
+    if (d && d.valor && d.mes && d.mes.includes('Julio 2026')) {
+      return d;
+    }
+    // Si la caché contenía un mes viejo (ej: Abril 2026), la reescribimos con los valores predeterminados
+    localStorage.setItem(key, JSON.stringify(defaults));
+    return defaults;
+  } catch { 
+    return defaults; 
+  }
+}
 
 async function loadCACFromSupabase() {
   try {
