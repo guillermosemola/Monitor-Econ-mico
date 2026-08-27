@@ -133,16 +133,16 @@
     .btn-save:hover { background:rgba(251,146,60,0.25); }
     .toast { font-size:10px; color:var(--ok); margin-top:6px; display:none; }
 
-    /* H-21 */
+    /* HORMIGÓN H-21 */
     .h21-card {
       background: var(--surface); border: 1px solid rgba(96,165,250,0.2);
       border-radius: 14px; padding: 24px 24px 20px; position: relative; overflow: hidden; transition: border-color 0.2s;
     }
     .h21-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--h21), transparent); }
     .h21-card:hover { border-color: rgba(96,165,250,0.4); }
-    .h21-top { display: grid; grid-template-columns: 260px 1fr; gap: 28px; align-items: start; }
+    .h21-top { display: grid; grid-template-columns: 280px 1fr; gap: 28px; align-items: start; }
     .h21-title { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-    .h21-value { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--h21); line-height: 1; margin-bottom: 4px; }
+    .h21-value { font-family: 'DM Serif Display', serif; font-size: 34px; color: var(--h21); line-height: 1; margin-bottom: 4px; }
     .h21-unit  { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
     .h21-meta  { font-size: 10px; color: var(--muted); margin-bottom: 16px; }
     .h21-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
@@ -280,17 +280,17 @@
   </div>
 
   <!-- ══════════ HORMIGÓN H-21 ══════════ -->
-  <div class="section-label">Hormigón Elaborado H-21 · precio m³ · carga manual mensual</div>
+  <div class="section-label">Hormigón Elaborado H-21 · precio m³ (en miles) · carga mensual</div>
   <div class="h21-card">
     <div class="h21-top">
       <div>
         <div class="h21-title">🏗 Hormigón H-21 — Precio m³</div>
         <div class="h21-value" id="h21-val">—</div>
-        <div class="h21-unit">ARS por m³ · referencia proveedor</div>
+        <div class="h21-unit">ARS (en miles) por m³ · ref. proveedor</div>
         <div class="h21-meta" id="h21-meta">Cargando...</div>
         <div class="h21-stats">
           <div class="h21-stat"><div class="h21-stat-label">Var. Mensual</div><div class="h21-stat-val" id="h21-var-mes">—</div></div>
-          <div class="h21-stat"><div class="h21-stat-label">Var. desde origen</div><div class="h21-stat-val" id="h21-var-anual">—</div></div>
+          <div class="h21-stat"><div class="h21-stat-label">Var. acumulada</div><div class="h21-stat-val" id="h21-var-anual">—</div></div>
           <div class="h21-stat"><div class="h21-stat-label">Mínimo serie</div><div class="h21-stat-val" id="h21-min">—</div></div>
           <div class="h21-stat"><div class="h21-stat-label">Máximo serie</div><div class="h21-stat-val" id="h21-max">—</div></div>
         </div>
@@ -300,10 +300,10 @@
         <div class="h21-form" id="form-h21">
           <div class="form-row">
             <div class="form-group"><label class="form-label">Mes (YYYY-MM)</label><input class="form-input form-input-h21" id="in-h21-mes" type="text" placeholder="ej: 2026-07"/></div>
-            <div class="form-group"><label class="form-label">Etiqueta</label><input class="form-input form-input-h21" id="in-h21-label" type="text" placeholder="ej: Julio 2026"/></div>
+            <div class="form-group"><label class="form-label">Etiqueta</label><input class="form-input form-input-h21" id="in-h21-label" type="text" placeholder="ej: Jul 2026"/></div>
           </div>
           <div class="form-row">
-            <div class="form-group"><label class="form-label">Valor m³ ($)</label><input class="form-input form-input-h21" id="in-h21-val" type="number" step="100" placeholder="ej: 185000"/></div>
+            <div class="form-group"><label class="form-label">Valor ($ en miles o valor total)</label><input class="form-input form-input-h21" id="in-h21-val" type="number" step="0.1" placeholder="ej: 185 o 185000"/></div>
           </div>
           <div class="cac-actions">
             <button class="btn-save-h21" onclick="saveH21()">✓ Guardar</button>
@@ -313,7 +313,7 @@
         </div>
       </div>
       <div>
-        <div class="h21-chart-label">Evolución precio H-21 — Ene 2025 → actualidad</div>
+        <div class="h21-chart-label">Evolución precio H-21 (en miles $) — Ene 2025 → Julio 2026</div>
         <div class="h21-chart-wrap" id="h21-chart"></div>
       </div>
     </div>
@@ -322,12 +322,21 @@
   <div class="footer">
     <div>AUTOMÁTICO — dolarapi.com · api.bcra.gob.ar (BCRA) · IPC INDEC vía BCRA · Riesgo País EMBI JP Morgan</div>
     <div>MANUAL MENSUAL — CAMARCO (camarco.org.ar) · publicación aproximada día 20 de cada mes</div>
-    <div>MANUAL MENSUAL — Hormigón H-21: precio por m³ · datos sincronizados globalmente</div>
-    <div>Histórico CAC precargado con datos oficiales CAMARCO Ene 2021 – Jul 2026</div>
+    <div>MANUAL MENSUAL — Hormigón H-21: precio expresado en miles de ARS por m³</div>
+    <div>Histórico CAC precargado con datos oficiales CAMARCO a Julio 2026</div>
   </div>
 </div>
 
 <script>
+/* ═══════════ CONTROL DE VERSIÓN DE CACHÉ LOCAL ═══════════ */
+const APP_VERSION = 'v2026_07_julio_v3';
+if (localStorage.getItem('mon_app_ver') !== APP_VERSION) {
+  localStorage.removeItem('mon_cac');
+  localStorage.removeItem('mon_mat');
+  localStorage.removeItem('mon_mo');
+  localStorage.removeItem('mon_h21');
+  localStorage.setItem('mon_app_ver', APP_VERSION);
+}
 
 /* ═══════════ SUPABASE CONFIG ═══════════ */
 const SUPA_URL = 'https://wbfnhsgayqabwidkhasg.supabase.co';
@@ -358,14 +367,9 @@ async function supaUpsert(table, data) {
       },
       body: JSON.stringify(data)
     });
-    if (!r.ok) {
-      const txt = await r.text();
-      console.error(`Error Supabase [${r.status}]: ${txt}`);
-      return false;
-    }
-    return true;
+    return r.ok;
   } catch(err) {
-    console.error('Error de red al guardar en Supabase:', err);
+    console.error('Error al guardar en Supabase:', err);
     return false;
   }
 }
@@ -402,9 +406,27 @@ const HIST_MO = [
 ];
 
 /* ═══════════ HELPERS ═══════════ */
-function fmtNum(v, dec = 2) {
+function fmtNum(v, dec = 1) {
   if (v == null || v === '') return '—';
   return Number(v).toLocaleString('es-AR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+}
+
+function fmtMiles(v) {
+  if (v == null || v === '') return '—';
+  const num = Number(v);
+  const valMiles = num >= 1000 ? num / 1000 : num;
+  return fmtNum(valMiles, 1) + ' mil';
+}
+
+function getMonthScore(mesStr) {
+  if (!mesStr) return 0;
+  const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const lower = mesStr.toLowerCase();
+  let m = 0, y = 2026;
+  months.forEach((name, idx) => { if (lower.includes(name)) m = idx + 1; });
+  const match = lower.match(/\d{4}/) || lower.match(/\d{2}/);
+  if (match) { y = parseInt(match[0]); if (y < 100) y += 2000; }
+  return y * 100 + m;
 }
 
 function buildChart(data, color, valKey = 'valor', h = 46) {
@@ -430,8 +452,7 @@ function buildChart(data, color, valKey = 'valor', h = 46) {
 
 function isStale(savedAt) {
   if (!savedAt) return false;
-  const diffDays = (Date.now() - new Date(savedAt).getTime()) / (1000 * 60 * 60 * 24);
-  return diffDays > 45;
+  return (Date.now() - new Date(savedAt).getTime()) / (1000 * 60 * 60 * 24) > 45;
 }
 
 /* ═══════════ DÓLAR ═══════════ */
@@ -521,24 +542,20 @@ function renderInd(bcraRaw) {
   }).join('');
 }
 
-/* ═══════════ CAC — MANEJO DE DATOS Y MIGRACIÓN AUTOMÁTICA ═══════════ */
+/* ═══════════ CAC — MANEJO Y CARGA DE DATOS ═══════════ */
 const DEF_CAC = { valor: 21960.7, variacion: 1.5, mes: 'Julio 2026', hist: HIST_CAC, savedAt: new Date().toISOString() };
 const DEF_MAT = { valor: 24149.4, variacion: 1.0, mes: 'Julio 2026', hist: HIST_MAT, savedAt: new Date().toISOString() };
 const DEF_MO  = { valor: 18752.8, variacion: 2.3, mes: 'Julio 2026', hist: HIST_MO,  savedAt: new Date().toISOString() };
 
 function loadLS(key, defaults) {
   try {
-    const d = JSON.parse(localStorage.getItem(key));
-    // Forzamos actualización si la caché local está desactualizada respecto a Julio 2026
-    if (d && d.valor && d.mes && d.mes.includes('Julio 2026')) {
-      return d;
+    const stored = JSON.parse(localStorage.getItem(key));
+    if (stored && stored.mes && getMonthScore(stored.mes) >= getMonthScore(defaults.mes)) {
+      return stored;
     }
-    // Si la caché contenía un mes viejo (ej: Abril 2026), la reescribimos con los valores predeterminados
-    localStorage.setItem(key, JSON.stringify(defaults));
-    return defaults;
-  } catch { 
-    return defaults; 
-  }
+  } catch(e){}
+  localStorage.setItem(key, JSON.stringify(defaults));
+  return defaults;
 }
 
 async function loadCACFromSupabase() {
@@ -546,22 +563,19 @@ async function loadCACFromSupabase() {
     const rows = await supaGet('cac_indicadores');
     if (rows && rows.length) {
       rows.forEach(row => {
-        if (row.valor < 5000) return;
+        if (!row.valor || row.valor < 5000) return;
         const key = row.indicador === 'cac' ? 'mon_cac' : row.indicador === 'mat' ? 'mon_mat' : 'mon_mo';
         const defaults = row.indicador === 'cac' ? DEF_CAC : row.indicador === 'mat' ? DEF_MAT : DEF_MO;
         const existing = loadLS(key, defaults);
-        
-        const supaTime = row.updated_at ? new Date(row.updated_at).getTime() : 0;
-        const localTime = existing.savedAt ? new Date(existing.savedAt).getTime() : 0;
-        
-        if (supaTime >= localTime) {
+
+        if (getMonthScore(row.mes) >= getMonthScore(existing.mes)) {
           const updated = { ...existing, valor: row.valor, variacion: row.variacion, mes: row.mes, savedAt: row.updated_at };
           localStorage.setItem(key, JSON.stringify(updated));
         }
       });
     }
   } catch(e) { 
-    console.log('Supabase no disponible para CAC, usando local', e);
+    console.log('Uso de respaldo local para CAC', e);
   }
   renderCACCards();
 }
@@ -576,8 +590,7 @@ function renderCACCards() {
     const v = data.variacion ? ` · ${data.variacion > 0 ? '+' : ''}${data.variacion}% mensual` : '';
     document.getElementById(id + '-meta').textContent = (data.mes || '') + v;
     
-    if (isStale(data.savedAt)) document.getElementById(id + '-stale').style.display = 'block';
-    else document.getElementById(id + '-stale').style.display = 'none';
+    document.getElementById(id + '-stale').style.display = isStale(data.savedAt) ? 'block' : 'none';
 
     const hist = data.hist || [];
     if (hist.length > 1) document.getElementById(chartId).innerHTML = buildChart(hist, '#fb923c');
@@ -604,10 +617,7 @@ async function saveIndicator(id) {
   const val = parseFloat(document.getElementById('in-' + id + '-val').value);
   const varM = parseFloat(document.getElementById('in-' + id + '-var').value) || null;
   const mes = document.getElementById('in-' + id + '-mes').value;
-  if (!val) {
-    alert('Ingrese un valor numérico.');
-    return;
-  }
+  if (!val) { alert('Ingrese un valor numérico.'); return; }
 
   const key = id === 'cac' ? 'mon_cac' : id === 'mat' ? 'mon_mat' : 'mon_mo';
   const defHist = id === 'cac' ? HIST_CAC : id === 'mat' ? HIST_MAT : HIST_MO;
@@ -628,21 +638,20 @@ async function saveIndicator(id) {
   renderCACCards();
 
   const toast = document.getElementById('toast-' + id);
-  if (toast) {
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 3000);
-  }
+  if (toast) { toast.style.display = 'block'; setTimeout(() => toast.style.display = 'none', 3000); }
 
-  supaUpsert('cac_indicadores', {
-    indicador: id,
-    valor: val,
-    variacion: varM,
-    mes: mes,
-    updated_at: savedAt
-  });
+  supaUpsert('cac_indicadores', { indicador: id, valor: val, variacion: varM, mes: mes, updated_at: savedAt });
 }
 
-/* ═══════════ HORMIGÓN H-21 ═══════════ */
+/* ═══════════ HORMIGÓN H-21 (EXPRESADO EN MILES) ═══════════ */
+const DEFAULT_H21 = [
+  { id_mes: '2025-01', etiqueta: 'Ene 2025', valor: 100000 },
+  { id_mes: '2025-06', etiqueta: 'Jun 2025', valor: 135000 },
+  { id_mes: '2025-12', etiqueta: 'Dic 2025', valor: 160000 },
+  { id_mes: '2026-04', etiqueta: 'Abr 2026', valor: 175000 },
+  { id_mes: '2026-07', etiqueta: 'Jul 2026', valor: 185000 }
+];
+
 function toggleH21Form() {
   const f = document.getElementById('form-h21');
   f.style.display = (f.style.display === 'none' || !f.style.display) ? 'block' : 'none';
@@ -651,19 +660,16 @@ function toggleH21Form() {
 async function saveH21() {
   const mes = document.getElementById('in-h21-mes').value.trim();
   const label = document.getElementById('in-h21-label').value.trim();
-  const val = parseFloat(document.getElementById('in-h21-val').value);
+  let rawVal = parseFloat(document.getElementById('in-h21-val').value);
 
-  if (!mes || isNaN(val)) {
-    alert('Por favor ingrese el mes (ej: 2026-07) y el precio por m³.');
+  if (!mes || isNaN(rawVal)) {
+    alert('Por favor ingrese el mes (ej: 2026-07) y el valor.');
     return;
   }
 
-  const row = {
-    id_mes: mes,
-    etiqueta: label || mes,
-    valor: val,
-    updated_at: new Date().toISOString()
-  };
+  const valFinal = rawVal < 1000 ? rawVal * 1000 : rawVal;
+
+  const row = { id_mes: mes, etiqueta: label || mes, valor: valFinal, updated_at: new Date().toISOString() };
 
   let localH21 = [];
   try { localH21 = JSON.parse(localStorage.getItem('mon_h21')) || []; } catch(e){}
@@ -679,10 +685,7 @@ async function saveH21() {
   renderH21Cards(localH21);
 
   const toast = document.getElementById('toast-h21');
-  if (toast) {
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 3000);
-  }
+  if (toast) { toast.style.display = 'block'; setTimeout(() => toast.style.display = 'none', 3000); }
 
   supaUpsert('h21_precios', row);
 }
@@ -693,17 +696,14 @@ async function loadH21Data() {
 
   const supaData = await supaGet('h21_precios', 'id_mes.asc');
   
-  if (supaData && supaData.length) {
+  if (supaData && supaData.length && getMonthScore(supaData[supaData.length - 1].id_mes) >= getMonthScore('2026-07')) {
     localStorage.setItem('mon_h21', JSON.stringify(supaData));
     renderH21Cards(supaData);
-  } else if (localData.length) {
+  } else if (localData.length && getMonthScore(localData[localData.length - 1].id_mes) >= getMonthScore('2026-07')) {
     renderH21Cards(localData);
   } else {
-    const mockH21 = [
-      { id_mes: '2025-01', etiqueta: 'Ene 2025', valor: 100000 },
-      { id_mes: '2026-07', etiqueta: 'Jul 2026', valor: 185000 }
-    ];
-    renderH21Cards(mockH21);
+    localStorage.setItem('mon_h21', JSON.stringify(DEFAULT_H21));
+    renderH21Cards(DEFAULT_H21);
   }
 }
 
@@ -715,7 +715,7 @@ function renderH21Cards(data) {
   const first = data[0];
   const prev = data.length > 1 ? data[data.length - 2] : null;
 
-  document.getElementById('h21-val').textContent = '$ ' + fmtNum(last.valor, 0);
+  document.getElementById('h21-val').textContent = '$ ' + fmtMiles(last.valor);
   document.getElementById('h21-meta').textContent = `Último dato: ${last.etiqueta || last.id_mes}`;
 
   if (prev && prev.valor) {
@@ -733,8 +733,8 @@ function renderH21Cards(data) {
   }
 
   const vals = data.map(d => d.valor);
-  document.getElementById('h21-min').textContent = '$ ' + fmtNum(Math.min(...vals), 0);
-  document.getElementById('h21-max').textContent = '$ ' + fmtNum(Math.max(...vals), 0);
+  document.getElementById('h21-min').textContent = '$ ' + fmtMiles(Math.min(...vals));
+  document.getElementById('h21-max').textContent = '$ ' + fmtMiles(Math.max(...vals));
 
   document.getElementById('h21-chart').innerHTML = buildChart(data, '#60a5fa', 'valor', 80);
 }
@@ -788,7 +788,6 @@ async function fetchAll() {
 }
 
 window.addEventListener('DOMContentLoaded', fetchAll);
-
 </script>
 </body>
 </html>
